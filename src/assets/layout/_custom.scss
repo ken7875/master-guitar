@@ -1,0 +1,65 @@
+.custom-checkout-label {
+    padding-left: 28px;
+    cursor: pointer;
+  }
+  .custom-checkout-label {
+    &::after, &::before {
+      content: "";
+      top: 50%;
+      position: absolute;
+      border-radius: 50%;
+    }
+    &::after {
+      left: 0px;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      border: 1px solid theme-color('dark');
+    }
+    &::before {
+      left: 10px;
+      transform: translate(-50%, -50%);
+      width: 14px;
+      height: 14px;
+      background-color: theme-color('dark');
+    }
+  }
+  .card-header.collapsed .custom-checkout-label::before {
+    display: none;
+  }
+  
+  .custom-step-line {
+    position: absolute;
+    &::after {
+      content: "";
+      position: absolute;
+      right: -1rem;
+      top: 50%;
+      width: 2rem;
+      height: 0.15rem;
+      background: black;
+      transform: translate(100%, -50%);
+    }
+    @include media-breakpoint-down(md) {
+      &::after {
+        display: none;
+      }
+    }
+  }
+  
+  @include media-breakpoint-down(md) {
+    .custom-header-md-open {
+      position: absolute;
+      top: 100%;
+      right: 0px;
+      left: 0px;
+    }
+    .opacity-1 {
+      opacity: 0.1;
+    }
+  }
+  @include media-breakpoint-up(md) {
+    .w-md-50 {
+      width: 50% !important;
+    }
+  }
