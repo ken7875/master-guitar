@@ -37,6 +37,11 @@ const routes = [
         path: '/confirm/:orderId',
         name: 'confirm',
         component: () => import('../views/frontend/Confirm.vue')
+      },
+      {
+        path: 'favorite',
+        name: 'favorite',
+        component: () => import('../views/frontend/Favorite.vue')
       }
     ]
   }

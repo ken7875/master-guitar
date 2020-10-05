@@ -6,8 +6,8 @@
         <h3 class="title font-weight-bold">Checkout</h3>
       </div>
     </div>
-    <div class="checklist row flex-row-reverse justify-content-center pb-5">
-      <div class="col-md-5">
+    <div class="row flex-row-reverse justify-content-center pb-5">
+      <div class="checklist col-md-5">
         <div class="border p-4 mb-4">
           <div class="checklist-content d-flex mb-4" v-for="item in carts" :key="item.product.id">
             <img
@@ -16,24 +16,39 @@
               style="width: 48px; height: 48px; object-fit: cover"
             />
             <div class="w-100">
-              <div class="d-flex justify-content-between">
+              <div class="mt-2 d-flex justify-content-between">
                 <p class="mb-0 font-weight-bold">{{item.product.title}}</p>
+                <p class="mb-0 font-weight-bold">X{{item.quantity}}</p>
                 <p class="mb-0">{{item.product.price}}</p>
               </div>
-              <p class="mb-0 font-weight-bold">X{{item.quantity}}</p>
             </div>
           </div>
-          <table class="table mt-4 border-top border-bottom text-muted">
-            <tbody>
-              <tr>
-                <th scope="row" class="border-0 px-0 pt-4 font-weight-normal">$總計</th>
-                <td class="text-right border-0 px-0 pt-4">NT${{total}}</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="mt-4 border-top border-bottom text-muted">
+              <div class="origin_total d-flex">
+                <div class="text1 border-0 font-weight-normal">$價格</div>
+                <div class="text2 border-0  font-weight-normal">NT${{origin_total}}</div>
+              </div>
+              <div class="shipping d-flex" v-if="origin_total >= 10000" disabled>
+                <div class="text1 border-0 font-weight-normal">$運費</div>
+                <div class="text2 border-0  font-weight-normal">NT$0</div>
+              </div>
+              <div class="shipping d-flex" v-if="origin_total < 10000" disabled>
+                <div class="text1 border-0 font-weight-normal">$運費</div>
+                <div class="text2 border-0 font-weight-normal">NT$200</div>
+              </div>
+              <div class="discount d-flex">
+                <div class="text1 border-0 font-weight-normal">$折扣</div>
+                <div class="text2 border-0 font-weight-normal">{{origin_total}}</div>
+              </div>
+              <div class="coupon">
+                <input type="text" v-model="coupon_code" value="輸入優惠碼" class="text-center text-muted ml-5">
+                <button type="button" class="couponBtn" @click="addCoupon">套用</button>
+              </div>
+          </div>
           <div class="d-flex justify-content-between mt-4">
             <p class="mb-0 h4 font-weight-bold">Total</p>
-            <p class="mb-0 h4 font-weight-bold">NT${{total}}</p>
+            <p class="mb-0 h4 font-weight-bold" v-if="coupon.enabled">NT${{parseInt(total * (coupon.percent / 100)) | thousands}}</p>
+            <p class="mb-0 h4 font-weight-bold" v-else>NT${{parseInt(total) | thousands}}</p>
           </div>
         </div>
       </div>
@@ -142,6 +157,30 @@
         margin-left: -50px;
         border-bottom: #000 solid;
     }
+    .coupon{
+      width: 300px;
+      margin: 25px 0 25px 30px;
+      margin-left: 30px;
+      white-space: nowrap;
+    }
+    .origin_total{
+      margin: 25px 0 25px 80px;
+    }
+    .shipping{
+      margin:0 0 25px 80px;
+    }
+    .discount{
+      margin-left: 80px;
+    }
+    .text1{
+      margin-right: 152px;
+    }
+    .checklist .couponBtn{
+      background-color: #a76641;
+      width: 60px;
+      height: 30px;
+      border: 0px;
+    }
 </style>
 
 <script>
@@ -158,7 +197,10 @@ export default {
       },
       isLoading: false,
       carts: [],
-      total: 0
+      origin_total: 0,
+      total: 0,
+      coupon: {},
+      coupon_code: ''
     }
   },
   created () {
@@ -175,21 +217,47 @@ export default {
       })
     },
     getTotalPrice () {
+      this.origin_total = 0
       this.total = 0
       this.carts.forEach((item) => {
-        this.total += item.product.price * item.quantity
+        this.origin_total += item.product.price * item.quantity
+        if (this.total < 10000) {
+          this.total = (this.origin_total + 200)
+        } else {
+          this.total = (this.origin_total + 0)
+        }
       })
     },
     createOrder () {
       this.isLoading = true
       const url = `${process.env.VUE_APP_APIPATH}${process.env.VUE_APP_UUID}/ec/orders`
       const order = { ...this.form }
+      if (this.coupon.enabled) {
+        order.coupon = this.coupon.code
+      } else {
+        order.coupon = ''
+      }
       this.axios.post(url, order)
         .then((res) => {
           this.isLoading = false
           this.getCart()
           this.$bus.$emit('get-cart')
           this.$router.push(`/confirm/${res.data.data.id}`)
+        })
+    },
+    addCoupon () {
+      this.isLoading = true
+      const url = `${process.env.VUE_APP_APIPATH}${process.env.VUE_APP_UUID}/ec/coupon/search`
+      this.axios.post(url, { code: this.coupon_code })
+        .then((res) => {
+          this.coupon = res.data.data
+          this.isLoading = false
+          console.log(this.coupon)
+        })
+        .catch(error => {
+          this.$bus.$emit('message:push', `加入失敗!${error.response.data.errors}`, 'danger')
+          this.coupon_code = ''
+          this.isLoading = false
         })
     }
   }

@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <loading :active.sync="isLoading"></loading>
-    <div class="container">
+    <div class="container" style="backgroundColor:#FFFDD0;">
       <div class="productList row align-items-center">
         <div class="ProductImg col-md-6">
           <img :src="imageUrl" alt="">
@@ -9,11 +9,11 @@
         <div class="col-md-6">
           <h2 class="productTitle font-weight-bold h2 mb-5">{{showProduct.title}}</h2>
           <p class="h4 font-weight-bold text-left mt-5 mb-5">{{showProduct.description}}</p>
-          <p class="h5 mb-2 text-muted text-left"><del>${{showProduct.origin_price}}</del></p>
-          <p class="h4 font-weight-bold text-left text-primary">${{showProduct.price}}</p>
+          <p class="h5 mb-2 text-muted text-left"><del>原價:${{showProduct.origin_price}}</del></p>
+          <p class="h4 font-weight-bold text-left text-primary">特價:${{showProduct.price}}</p>
           <p class="h6 text-right text-primary">*樂器與音箱有一年售後維修保固</p>
           <div class="cart d-flex row align-items-center">
-            <div class="justify-content-center input-group my-3 mr-2 bg-light rounded">
+            <div class="justify-content-center input-group my-3 mr-2 rounded mb-4">
               <div class="input-group-prepend">
                 <button class="minus-btn btn-outline-dark border-5 py-2" type="button" id="button-addon1"
                 @click="quantity = (quantity - 1)" :disabled="quantity === 1">
@@ -34,17 +34,32 @@
         </div>
       </div>
     </div>
-    <div class="bg-dark py-5 mt-5">
+    <Relative :showproduct="showProduct" @update="getSingleProduct"></Relative>
+    <div class="footer py-5">
       <div class="container">
         <div class="d-flex align-items-center justify-content-between text-white mb-md-7 mb-4">
-          <a class="text-white h4" href="./index.html">LOGO</a>
+          <a class="title" href="./index.html">Master Gutair</a>
           <ul class="d-flex list-unstyled mb-0 h4">
-            <li><a href="#" class="text-white mx-3"><i class="fab fa-facebook"></i></a></li>
-            <li><a href="#" class="text-white mx-3"><i class="fab fa-instagram"></i></a></li>
-            <li><a href="#" class="text-white ml-3"><i class="fab fa-line"></i></a></li>
+            <li>
+              <a href="#" class="text-white mx-3">
+                <i class="fab fa-facebook"></i>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="text-white mx-3">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="text-white ml-3">
+                <i class="fab fa-line"></i>
+              </a>
+            </li>
           </ul>
         </div>
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end align-items-start text-white">
+        <div
+          class="d-flex flex-column flex-md-row justify-content-between align-items-md-end align-items-start text-white"
+        >
           <div class="mb-md-0 mb-1">
             <p class="mb-0">02-3456-7890</p>
             <p class="mb-0">service@mail.com</p>
@@ -62,22 +77,24 @@
 }
 
 .ProductImg img{
-    height: 450px;
-    width: 430px;
-    }
+  height: 450px;
+  width: 430px;
+}
 
 .productTitle{
-    margin-top: 70px;
+  margin-top: 70px;
 }
 
 .cart{
-    margin-top: 40px;
+  margin-top: 40px;
 }
 
 .minus-btn{
-    width: 40px;
+  width: 40px;
 }
-
+.minus-btn:disabled{
+  background-color: #CCCCFF;
+}
 .add-btn{
     width:40px
 }
@@ -89,16 +106,32 @@
 
 .cart-btn{
     margin: 0 auto;
+    margin-bottom: 50px;
 }
-
+.footer{
+  background-color: #a76641;
+}
+.footer .title{
+  font-size: 30px;
+  color: #000;
+  font-family: 'Special Elite', cursive;
+}
 </style>
 
 <script>
+import Relative from '@/components/Relative.vue'
+
 export default {
+  components: {
+    Relative
+  },
   data () {
     return {
+      showProduct: {
+        imageUrl: [],
+        num: 1
+      },
       products: [],
-      showProduct: [],
       imageUrl: '',
       carts: [],
       quantity: 1,
@@ -131,13 +164,14 @@ export default {
     getSingleProduct () {
       this.isLoading = true
       const id = this.$route.params.id
-      this.showProduct = []
+      this.showProduct = {}
       const url = `${process.env.VUE_APP_APIPATH}${process.env.VUE_APP_UUID}/ec/product/${id}`
       this.$http.get(url)
         .then((res) => {
           this.isLoading = false
           this.showProduct = res.data.data
           this.imageUrl = this.showProduct.imageUrl[0]
+          this.$set(this.showProduct, 'num', 1)
         })
     },
     addToCart (id, quantity = 1) {
@@ -151,6 +185,10 @@ export default {
           this.isLoading = false
           this.getCart()
           this.$bus.$emit('get-cart')
+          this.$bus.$emit('message-push', '商品成功加入購物車!', 'success')
+        })
+        .catch((error) => {
+          this.$bus.$emit('message-push', `加入失敗!${error.response.data.errors}`, 'danger')
         })
     }
   }

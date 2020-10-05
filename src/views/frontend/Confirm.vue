@@ -26,22 +26,14 @@
             <div class="w-100">
               <div class="d-flex justify-content-between">
                 <p class="mb-0 font-weight-bold">{{product.product.title}}</p>
-                <p class="mb-0">{{product.product.price}}</p>
+                <p class="mb-0">{{product.product.price | thousands}}</p>
               </div>
               <p class="mb-0 font-weight-bold">X{{product.quantity}}</p>
             </div>
           </div>
-          <table class="table mt-4 border-top border-bottom text-muted">
-            <tbody>
-              <tr>
-                <th scope="row" class="border-0 px-0 pt-4 font-weight-normal">$總計</th>
-                <td class="text-right border-0 px-0 pt-4">NT${{order.amount}}</td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="d-flex justify-content-between mt-4">
-            <p class="mb-0 h4 font-weight-bold">Total</p>
-            <p class="mb-0 h4 font-weight-bold">NT${{order.amount}}</p>
+          <div class="d-flex justify-content-between mt-4 border-top">
+            <p class="mb-0 mt-4 h4 font-weight-bold">Total</p>
+            <p class="mb-0 mt-4 h4 font-weight-bold">NT${{parseInt(order.amount) | thousands}}</p>
           </div>
         </div>
         <div class="confirm" v-if="order.paid === false">
@@ -193,6 +185,7 @@ export default {
       this.isLoading = true
       this.$http.get(url).then((res) => {
         this.order = res.data.data
+        this.origin_total = res.data.data.amount
         this.isLoading = false
       })
     },

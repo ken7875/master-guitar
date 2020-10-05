@@ -59,10 +59,10 @@
           <button class="btn btn-dark" @click="goPay">前往結帳</button>
       </div>
     </div>
-    <div class="bg-dark py-5">
+    <div class="footer py-5">
       <div class="container">
         <div class="d-flex align-items-center justify-content-between text-white mb-md-7 mb-4">
-          <a class="text-white h4" href="./index.html">LOGO</a>
+          <a class="title" href="./index.html">Master Gutair</a>
           <ul class="d-flex list-unstyled mb-0 h4">
             <li>
               <a href="#" class="text-white mx-3">
@@ -144,6 +144,14 @@
 }
 .total btn{
   width: 80px;
+}
+.footer{
+  background-color: #a76641;
+}
+.footer .title{
+  font-size: 30px;
+  color: #000;
+  font-family: 'Special Elite', cursive;
 }
 </style>
 

@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Toasts/>
     <router-view/>
   </div>
 </template>
@@ -29,3 +30,14 @@
   }
 }
 </style>
+
+<script>
+import Toasts from '@/components/Toasts.vue'
+
+export default {
+  name: 'App',
+  components: {
+    Toasts
+  }
+}
+</script>
