@@ -22,6 +22,11 @@
         </div>
       </div>
     </div>
+    <div class="Bulletin d-flex justify-content-center">
+      <div class="img">
+        <p>歡慶實體店面開幕，凡是輸入優惠碼<span>GUITAR_0928</span>想三折優惠</p>
+      </div>
+    </div>
     <div class="productTitle">
       <div class="text">產品列表</div>
     </div>
@@ -156,6 +161,29 @@
 .btn-first {
   font-size: 20px;
   margin-top: 15px;
+}
+.Bulletin{
+  margin-top: 90px;
+}
+.Bulletin .img{
+  padding-top: 140px;
+  opacity: 0.8;
+  background-position: center;
+  background-size: cover;
+  height: 330px;
+  width: 100%;
+  background-image: url('https://images.unsplash.com/photo-1572095718016-588275313d49?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&q=60');
+  background-attachment: fixed;
+}
+.Bulletin .img p{
+  font-size: 25px;
+  color: white;
+}
+.Bulletin .img p span{
+  background-color: red;
+  margin:0 15px 0 15px;
+  padding:10px 20px 10px 20px;
+  font-size: 25px;
 }
 .productTitle {
   height: 150px;
