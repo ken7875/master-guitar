@@ -10,7 +10,7 @@
     </ul>
     <div class="container mt-md-5 mt-3 mb-7">
       <div class="row">
-        <div class="col-md-12">
+        <div class="products col-md-12">
           <div class="row">
             <div class="productList col-md-4" v-for="product in showProducts" :key="product.id">
               <div class="card border-4 mb-4">
@@ -92,6 +92,9 @@
   .categoryList a{
     color: #a76641;
   }
+  .products{
+    position: sticky;
+  }
   .card-img{
     height: 350px;
     width: 100%;
@@ -139,13 +142,12 @@ export default {
   methods: {
     getProducts (num = 1) {
       this.isLoading = true
-      const category = this.$route.params.category
       const url = `${process.env.VUE_APP_APIPATH}${process.env.VUE_APP_UUID}/ec/products?pages=${num}`
       this.axios.get(url).then((res) => {
         this.showProducts = []
+        const category = this.$route.params.category
         this.products = res.data.data
         this.pagination = res.data.meta.pagination
-        console.log(res)
         this.products.forEach((product) => {
           if (category === product.category) {
             this.showProducts.push(product)
@@ -156,8 +158,8 @@ export default {
           }
           this.category = category
         })
-        this.isLoading = false
       })
+      this.isLoading = false
     },
     addToCart (id, quantity = 1) {
       this.status.loadingItem = id
