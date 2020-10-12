@@ -22,9 +22,12 @@
         </div>
       </div>
     </div>
+    <div class="productTitle">
+        <div class="text">優惠活動</div>
+    </div>
     <div class="Bulletin d-flex justify-content-center">
       <div class="img">
-        <p>歡慶實體店面開幕，凡是輸入優惠碼<span>GUITAR_0928</span>想三折優惠</p>
+        <p>歡慶實體店面開幕，凡是輸入優惠碼<span>GUITAR_0928</span>就享有三折優惠</p>
       </div>
     </div>
     <div class="productTitle">
