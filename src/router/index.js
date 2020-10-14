@@ -44,6 +44,28 @@ const routes = [
         component: () => import('../views/frontend/Favorite.vue')
       }
     ]
+  },
+  {
+    path: '/login',
+    component: () => import('../views/Backend/LogIn.vue')
+  },
+  {
+    path: '/admin',
+    component: () => import('../views/Backend/Dashboard.vue'),
+    children: [
+      {
+        path: 'backendProducts',
+        component: () => import('../views/Backend/Backend/BackendProducts.vue')
+      },
+      {
+        path: 'backendOrders',
+        component: () => import('../views/Backend/Backend/BackendOrders.vue')
+      },
+      {
+        path: 'backendCoupons',
+        component: () => import('../views/Backend/Backend/BackendCoupons.vue')
+      }
+    ]
   }
 ]
 

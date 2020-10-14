@@ -7,7 +7,7 @@
           <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
             <div class="navbar-nav">
               <ul class="navbar-nav">
-               <li class="home nav-link mr-4"><router-link class="nav-link" to="/"><p>首頁</p></router-link></li><li class="products nav-link mr-4"><router-link class="nav-link" to="/products/all-Products"><p>產品列表</p></router-link></li><li class="favorite"><router-link class="nav-link" to="/favorite"><i class="fas fa-heart text-light"></i></router-link></li><li class="nav-item nav-link mr-4"><router-link class="nav-link" to="/carts"><i class="fas fa-shopping-cart"></i><span class="badge badge-pill badge-danger" v-if="carts.length">{{carts.length}}</span></router-link></li>
+               <li class="home nav-link mr-4"><router-link class="nav-link" to="/"><p>首頁</p></router-link></li><li class="products nav-link mr-4"><router-link class="nav-link" to="/products/all-Products"><p>產品列表</p></router-link></li><li class="logIn nav-link mr-4"><router-link class="nav-link" to="/login"><p>管理頁面</p></router-link></li><li class="favorite"><router-link class="nav-link" to="/favorite"><i class="fas fa-heart text-light"></i></router-link></li><li class="nav-item nav-link mr-4"><router-link class="nav-link" to="/carts"><i class="fas fa-shopping-cart"></i><span class="badge badge-pill badge-danger" v-if="carts.length">{{carts.length}}</span></router-link></li>
               </ul>
             </div>
           </div>
@@ -47,6 +47,9 @@
     margin-top: 15px;
   }
   .navbar-nav .products{
+    margin-top: 15px;
+  }
+  .navbar-nav .logIn{
     margin-top: 15px;
   }
   .nav-link p{

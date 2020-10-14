@@ -293,9 +293,9 @@
   background-color: gray;
 }
 .hotProduct:hover{
-  box-shadow: 3px 3px 3px;
+  box-shadow: 0 0 10px red, 0 0 40px red, 0 0 80px red;
   cursor: pointer;
-  opacity: 0.3;
+  opacity: 0.8;
 }
 .introduce{
   margin-bottom: 80px;
