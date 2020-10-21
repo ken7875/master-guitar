@@ -165,9 +165,6 @@
   font-size: 20px;
   margin-top: 15px;
 }
-.topicImg {
-  width: 100;
-}
 .Bulletin{
   margin-top: 90px;
 }
