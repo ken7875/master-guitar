@@ -8,7 +8,7 @@
       background-position: center center;"
       ></div>
       <div class="title-container d-flex flex-column" style="min-height: 80vh;">
-        <div class="row justify-content-center my-auto">
+        <div class="d-flex justify-content-center my-auto">
           <div class="col-md-6 text-center">
             <p class="title text-light">大師吉他</p>
             <p class="text text-light">
@@ -164,6 +164,9 @@
 .btn-first {
   font-size: 20px;
   margin-top: 15px;
+}
+.topicImg {
+  width: 100;
 }
 .Bulletin{
   margin-top: 90px;
