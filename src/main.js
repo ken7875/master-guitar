@@ -2,8 +2,6 @@ import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import jquery from 'jquery'
-import VueAwesomeSwiper from 'vue-awesome-swiper'
-import 'swiper/swiper-bundle.css'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
 import App from './App.vue'
@@ -18,6 +16,12 @@ import {
 } from 'vee-validate'
 import * as rules from 'vee-validate/dist/rules'
 import zhTW from 'vee-validate/dist/locale/zh_TW.json'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/swiper-bundle.css'
+// core version + navigation, pagination modules:
+import Swiper, { Navigation, Pagination } from 'swiper'
+// configure Swiper to use modules
+Swiper.use([Navigation, Pagination])
 
 Vue.config.productionTip = false
 window.$ = jquery

@@ -1,122 +1,44 @@
 <template>
   <div class="wrap">
     <loading :active.sync="isLoading"></loading>
-    <div class="container" style="backgroundColor:#FFFDD0;">
+    <div class="container py-3" style="backgroundColor:#FFFDD0;">
       <div class="productList row align-items-center">
-        <div class="ProductImg col-md-6">
-          <img :src="imageUrl" alt="">
+        <div class="ProductImg col-md-6 mb-6 mb-lg-0">
+          <img :src="imageUrl" alt="product">
         </div>
         <div class="col-md-6">
-          <h2 class="productTitle font-weight-bold h2 mb-5">{{showProduct.title}}</h2>
-          <p class="h4 font-weight-bold text-left mt-5 mb-5">{{showProduct.description}}</p>
-          <p class="h5 mb-2 text-muted text-left"><del>原價:${{showProduct.origin_price}}</del></p>
-          <p class="h4 font-weight-bold text-left text-primary">特價:${{showProduct.price}}</p>
-          <p class="h6 text-right text-primary">*樂器與音箱有一年售後維修保固</p>
-          <div class="cart d-flex row align-items-center">
-            <div class="justify-content-center input-group my-3 mr-2 rounded mb-4">
-              <div class="input-group-prepend">
-                <button class="minus-btn btn-outline-dark border-5 py-2" type="button" id="button-addon1"
-                @click="quantity = (quantity - 1)" :disabled="quantity === 1">
-                  -
-                </button>
-              </div>
-              <input type="number" class="productQty border-5 text-center my-auto shadow-none bg-light" aria-label="Example text with button addon" aria-describedby="button-addon1"  :value="quantity">
-              <div class="input-group-append">
-                <button class="add-btn border-5 btn-outline-dark py-2" type="button" id="button-addon2" @click="quantity = (quantity + 1)">
-                  +
-                </button>
-              </div>
+          <h2 class="productTitle font-weight-bold h2 mb-lg-10 mb-8">
+            {{showProduct.title}}
+          </h2>
+          <p class="h4 font-weight-bold text-left mt-5 mb-5">
+            {{showProduct.description}}
+          </p>
+          <p class="h5 mb-2 text-muted text-left">
+            <del>原價:${{showProduct.origin_price}}</del>
+          </p>
+          <p class="h4 font-weight-bold text-left text-primary">
+            特價:${{showProduct.price}}
+          </p>
+          <p class="h6 text-right text-primary mb-lg-10 mb-8">*樂器與音箱有一年售後維修保固</p>
+          <div class="input-group px-8 mb-lg-5 mb-4">
+            <div class="input-group-prepend">
+              <button class="addBtn btn btn-outline-secondary px-3" type="button" id="quality" @click="quantity = (quantity - 1)" :disabled="quantity === 1"><i class="fas fa-minus"></i></button>
             </div>
-            <div class="cart-btn col-9">
-              <button class="btn btn-dark btn-block" @click="addToCart(showProduct.id, quantity)">加入購物車</button>
+            <input type="text" class="form-control h-100 py-3 quality text-center" :value="quantity" aria-label="Recipient's username" aria-describedby="quality">
+            <div class="input-group-append">
+              <button class="minusBtn btn bg-wood px-3" type="button" id="quality" @click="quantity = (quantity + 1)"><i class="fas fa-plus"></i></button>
             </div>
+          </div>
+          <div class="cart-btn px-8">
+              <button class="btn btn-wood btn-block" @click="addToCart(showProduct.id, quantity)">加入購物車</button>
           </div>
         </div>
       </div>
     </div>
+    <h2 class="second_title mt-lg-12 mt-10">相關商品</h2>
     <Relative :showproduct="showProduct" @update="getSingleProduct"></Relative>
-    <div class="footer py-5">
-      <div class="container">
-        <div class="d-flex align-items-center justify-content-between text-white mb-md-7 mb-4">
-          <a class="title" href="./index.html">Master Gutair</a>
-          <ul class="d-flex list-unstyled mb-0 h4">
-            <li>
-              <a href="#" class="text-white mx-3">
-                <i class="fab fa-facebook"></i>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="text-white mx-3">
-                <i class="fab fa-instagram"></i>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="text-white ml-3">
-                <i class="fab fa-line"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div
-          class="d-flex flex-column flex-md-row justify-content-between align-items-md-end align-items-start text-white"
-        >
-          <div class="mb-md-0 mb-1">
-            <p class="mb-0">02-3456-7890</p>
-            <p class="mb-0">service@mail.com</p>
-          </div>
-          <p class="mb-0">© 2020 LOGO All Rights Reserved.</p>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.productList{
-    margin-top: 80px;
-}
-
-.ProductImg img{
-  height: 450px;
-  width: 430px;
-}
-
-.productTitle{
-  margin-top: 70px;
-}
-
-.cart{
-  margin-top: 40px;
-}
-
-.minus-btn{
-  width: 40px;
-}
-.minus-btn:disabled{
-  background-color: #CCCCFF;
-}
-.add-btn{
-    width:40px
-}
-
-.productQty{
-    width: 318px;
-    height: 50px;
-}
-
-.cart-btn{
-    margin: 0 auto;
-    margin-bottom: 50px;
-}
-.footer{
-  background-color: #a76641;
-}
-.footer .title{
-  font-size: 30px;
-  color: #000;
-  font-family: 'Special Elite', cursive;
-}
-</style>
 
 <script>
 import Relative from '@/components/Relative.vue'
@@ -171,7 +93,6 @@ export default {
           this.isLoading = false
           this.showProduct = res.data.data
           this.imageUrl = this.showProduct.imageUrl[0]
-          this.$set(this.showProduct, 'num', 1)
         })
     },
     addToCart (id, quantity = 1) {

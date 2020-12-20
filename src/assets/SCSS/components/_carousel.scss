@@ -1,0 +1,24 @@
+$carousel-transition: transform 2s ease, opacity .5s ease-out;
+.carousel-item{
+    .img{
+        height: 700px;
+    }
+    .title{
+        font-size: 70px;
+    }
+    .text{
+        font-size: 28px;
+    }
+    .carouselImg_second{
+        background-color: #000000;
+        img{
+            left: 0;
+        }
+        .secondTitle{
+            font-size: 35px;
+        }
+    }
+    .date{
+        font-size: 30px;
+    }
+}

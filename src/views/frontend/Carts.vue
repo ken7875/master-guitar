@@ -1,159 +1,48 @@
 <template>
-  <div class="wrap">
+  <div class="carts container">
     <loading :active.sync="isLoading"></loading>
-    <div class="container">
-      <div class="mt-3">
-        <h3 class="mt-5 mb-5">購物車</h3>
-        <div class="container">
-          <div class="col-md-12" style="margin:0 auto;" v-for="item in carts" :key="item.product.id + 'carts'">
-            <div class="card">
-              <div class="content row justify-content-md-start">
-                <div class="img col-md-2 mr-4">
-                  <img :src="`${item.product.imageUrl[0]}`">
-                </div>
-                <div class="title col-md-2 mr-4 justify-content-md-center">
-                  <p>{{item.product.title}}</p>
-                </div>
-                <div class="input-group col-md-4">
-                  <div class="input-group-prepend" style="width:30px;">
-                    <button
-                      class="minus-btn btn-outline-dark border-5"
-                      type="button"
-                      id="button-addon1"
-                      @click="item.quantity--;updateQty( item.product.id, item.quantity)"
-                      :disabled="item.quantity === 1"
-                    >-</button>
-                  </div>
-                  <input
-                    type="number"
-                    class="productQty border-5 text-center my-auto shadow-none bg-light"
-                    aria-label="Example text with button addon"
-                    aria-describedby="button-addon1"
-                    v-model="item.quantity"
-                    @keyup="updateQty(item.product.id,item.quantity)"
-                  >
-                  <div class="input-group-append" style="width:30px;">
-                    <button
-                      class="add-btn border-5 btn-outline-dark"
-                      type="button"
-                      id="button-addon2"
-                      @click="item.quantity++;updateQty( item.product.id, item.quantity)"
-                    >+</button>
-                  </div>
-                </div>
-                <div class="price col-md-2">
-                  <p>{{item.product.price}}</p>
-                </div>
-                <div class="delPic col-md-1">
-                  <a href="#" @click.prevent="delData(item.product.id)"><i class="fas fa-trash-alt"></i></a>
-                </div>
+    <h2 class="mt-5 mb-5 section_title">購物車</h2>
+    <div class="row">
+      <div class="col-12" v-for="item in carts" :key="item.product.id + 'carts'">
+        <div class="card justify-content-md-start mb-lg-8 mb-6">
+          <div class="row align-items-center no-gutters">
+            <div class="img col-lg-2 col-md-3">
+              <img :src="`${item.product.imageUrl[0]}`" />
+            </div>
+            <div class="font-md col-md-3 col-8">
+              <p class="title text-md-center text-left">{{item.product.title}}</p>
+            </div>
+            <div class="input-group mb-3 col-md-3 col-7">
+              <div class="input-group-prepend">
+                <button class="btn btn-outline-secondary px-lg-3 px-2" type="button" id="quantity" @click="item.quantity--;updateQty( item.product.id, item.quantity)">
+                  <i class="fas fa-minus font-sm"></i>
+                </button>
               </div>
+              <input type="number" class="form-control h-100 py-3 text-center" :value="item.quantity" aria-label="quantity" aria-describedby="quantity" id="quantity" @keyup="updateQty(item.product.id,item.quantity)">
+              <div class="input-group-append">
+                <button class="btn btn-wood px-lg-3 px-2" type="button" id="quantity" @click="item.quantity++;updateQty( item.product.id, item.quantity)">
+                  <i class="fas fa-plus font-sm"></i>
+                </button>
+              </div>
+            </div>
+            <div class="price col-md-2 col-5">
+              <p>$ {{item.product.price * item.quantity}}</p>
+            </div>
+            <div class="delPic col-md-1 font-lg pb-3">
+              <a href="#" @click.prevent="delData(item.product.id)">
+                <i class="fas fa-trash-alt text-danger"></i>
+              </a>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="checkOut">
-      <div class="total">
-        <p>總計$: {{total}}</p>
-          <button class="btn btn-dark" @click="goPay">前往結帳</button>
-      </div>
-    </div>
-    <div class="footer py-5">
-      <div class="container">
-        <div class="d-flex align-items-center justify-content-between text-white mb-md-7 mb-4">
-          <a class="title" href="./index.html">Master Gutair</a>
-          <ul class="d-flex list-unstyled mb-0 h4">
-            <li>
-              <a href="#" class="text-white mx-3">
-                <i class="fab fa-facebook"></i>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="text-white mx-3">
-                <i class="fab fa-instagram"></i>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="text-white ml-3">
-                <i class="fab fa-line"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div
-          class="d-flex flex-column flex-md-row justify-content-between align-items-md-end align-items-start text-white"
-        >
-          <div class="mb-md-0 mb-1">
-            <p class="mb-0">02-3456-7890</p>
-            <p class="mb-0">service@mail.com</p>
-          </div>
-          <p class="mb-0">© 2020 LOGO All Rights Reserved.</p>
-        </div>
-      </div>
+    <div class=" total flex-wrap row no-gutters">
+      <p class="text-right font-xl col-lg-12">總計$: {{total}}</p>
+      <button class="btn btn-primary col-md-3 offset-md-9 py-2 font-md" @click="goPay">前往結帳</button>
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.card img {
-  width: 200px;
-  height: 180px;
-  display: flex;
-  align-items: left;
-}
-.content .title {
-  display: flex;
-  align-items: center;
-}
-.minus-btn {
-  width: 30px;
-  height: 40px;
-}
-.add-btn {
-  width: 30px;
-  height: 40px;
-}
-.content .input-group{
-  width: 200px;
-  display: flex;
-  align-items: center;
-}
-.content .productQty {
-  width: 150px;
-  height: 40px;
-}
-.content .price {
-  display: flex;
-  align-items: center;
-}
-.content .delPic{
-  color: red;
-  display: flex;
-  align-items: center;
-}
-.content .delPic .fas {
-  color: red;
-}
-.total{
-  font-size: 25px;
-  color: red;
-  margin-left: 867px;
-  margin-bottom: 100px;
-  margin-top: 50px;
-}
-.total btn{
-  width: 80px;
-}
-.footer{
-  background-color: #a76641;
-}
-.footer .title{
-  font-size: 30px;
-  color: #000;
-  font-family: 'Special Elite', cursive;
-}
-</style>
 
 <script>
 export default {
@@ -216,6 +105,5 @@ export default {
       this.$router.push('/pay')
     }
   }
-
 }
 </script>

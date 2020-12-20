@@ -1,0 +1,16 @@
+.navbar{
+    .navbar-brand{
+        font-size: 40px;
+        font-family: 'Special Elite', cursive;
+        i{
+            font-size: 50px;
+        }
+    }
+    .badge{
+        transform: translateX(-5px) translateY(5px);
+        font-size: 13px;
+    }
+}
+.categoryList li{
+    border: 1px solid $white;
+}

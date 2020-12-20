@@ -1,61 +1,30 @@
 <template>
-     <div class="container mt-5">
-        <div class="title h3 border-bottom">相關商品</div>
-        <div class="row mt-5">
-          <div class="col-md-3 mt-md-4" v-for="item in identical" :key="item.id">
-            <div class="product border-0 mb-4" @click="getDetail(item.id)">
-              <div class="img" :style="{backgroundImage:`url(${(item.imageUrl[0])})`}">
-                <div class="text">查看此商品</div>
-              </div>
-              <div class="card-body text-center">
-                <h4>{{item.title}}</h4>
-                <div class="d-flex justify-content-end mt-5">
-                  <p class="card-text text-primary mb-0" style="font-size:20px;">
-                    特價:{{item.price}}
-                  </p>
-                </div>
-                <div class="d-flex justify-content-end">
-                  <p class="card-text text-muted mb-0">
-                    <del>原價:{{item.origin_price}}</del>
-                  </p>
-                </div>
-              </div>
-            </div>
+  <swiper class="swiper row mt-lg-8 mt-6" ref="mySwiper" :options="swiperOption">
+    <swiper-slide v-for="item in identical" :key="item.id" class="swiper-slide col-lg-3">
+      <div class="card border-0">
+        <div class="product border-0 mb-4" @click="getDetail(item.id)">
+          <img :src="`${item.imageUrl[0]}`" class="card-img-top" alt="top-choice 1">
+          <div class="card-body py-2 px-0">
+            <p class="font-lg text-left">{{item.title}}</p>
+            <p class="mb-0 font-md text-left">特價:{{item.price | thousands}}</p>
+            <p class="text-muted mt-1 text-left"><del>原價:{{item.origin_price | thousands}}</del></p>
           </div>
         </div>
       </div>
+    </swiper-slide>
+    <div class="swiper-pagination" slot="pagination"></div>
+  </swiper>
 </template>
 
-<style lang="scss" scoped>
-.product .img{
-  position: relative;
-  height: 200px;
-  background-position: center;
-  background-size: cover;
-}
-.text{
-  display: none;
-}
-.product:hover .text{
-  position: absolute;
-  margin-top: 80px;
-  font-size: 25px;
-  width: 100%;
-  height: 40px;
-  display: block;
-  color: #fff;
-  border: 1px solid #000;
-  background-color: gray;
-}
-.product:hover{
-  box-shadow: 3px 3px 3px;
-  cursor: pointer;
-  opacity: 0.6;
-}
-</style>
-
 <script>
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import 'swiper/swiper-bundle.css'
+import 'swiper/components/pagination/pagination.scss'
 export default {
+  components: {
+    Swiper,
+    SwiperSlide
+  },
   props: {
     showproduct: {
       type: Object
@@ -63,7 +32,39 @@ export default {
   },
   data () {
     return {
-      products: []
+      products: [],
+      swiperOption: {
+        direction: 'horizontal',
+        slidesPerView: 1,
+        spaceBetween: 0,
+        slidesPerGroup: 2,
+        speed: 2000,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        },
+        loop: true,
+        autoplay: {
+          delay: 2000,
+          stopOnLastSlide: false,
+          disableOnInteraction: false
+        },
+        freeMode: true,
+        breakpoints: {
+          // when window width is >= 992px
+          992: {
+            slidesPerView: 4
+          },
+          // when window width is >= 767px
+          767: {
+            slidesPerView: 3
+          },
+          // when window width is >= 414px
+          414: {
+            slidesPerView: 2
+          }
+        }
+      }
     }
   },
   created () {

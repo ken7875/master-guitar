@@ -1,0 +1,47 @@
+.card{
+    img{
+        height: 255px;
+        @include mobile(){
+            height: 450px;
+        }
+    }
+    position:relative;
+    .favor{
+        font-size: 35px;
+        right: 20px;
+        z-index: 1000;
+        cursor: pointer;
+    }
+    .img{
+        height: 255px;
+        @include mobile(){
+            height: 450px;
+        }
+    }
+    .productImg{
+        transition: transform .5s;
+        p{
+            opacity: 0;
+            position: relative;
+        }
+        &:hover{
+            opacity: 0.8;
+            p{
+                animation-name: faedText;
+                animation-duration: .8s;
+                animation-fill-mode: forwards;
+            }
+        } 
+    }
+}
+
+.carts .card{
+    .title{
+        @include mobile(){
+            font-size: 24px;
+        }
+    }
+    .price{
+        font-size: 24px;
+    }
+}

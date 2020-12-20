@@ -1,0 +1,12 @@
+.footer{
+    .navbar-brand{
+        font-size: 35px;
+        font-family: 'Special Elite', cursive;
+        @include pad(){
+            font-size: 25px;
+        }
+        @include mobile(){
+            font-size: 20px;
+        }
+    }
+}

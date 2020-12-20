@@ -1,61 +1,83 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light">
-          <div class="nav-title"><a class="navbar-brand" href="./index.html"><p><i class="fas fa-guitar"></i>Master Guitar<p/></a></div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+  <div class="wrap w-100 sticky-top">
+    <nav class="navbar navbar-expand-lg bg-wood py-5 navbar">
+      <div class="container-md">
+        <h1>
+          <router-link class="navbar-brand text-dark" to="/">
+            <i class="fas fa-guitar mr-3"></i>Master Guitar
+          </router-link>
+        </h1>
+          <button class="btn d-lg-none font-lg px-0" type="button" data-toggle="collapse" data-target="#Navmenu" aria-expanded="false" aria-controls="Navmenu">
+            <i class="fas fa-bars"></i>
           </button>
-          <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-              <ul class="navbar-nav">
-               <li class="home nav-link mr-4"><router-link class="nav-link" to="/"><p>首頁</p></router-link></li><li class="products nav-link mr-4"><router-link class="nav-link" to="/products/all-Products"><p>產品列表</p></router-link></li><li class="logIn nav-link mr-4"><router-link class="nav-link" to="/login"><p>管理頁面</p></router-link></li><li class="favorite"><router-link class="nav-link" to="/favorite"><i class="fas fa-heart text-light"></i></router-link></li><li class="nav-item nav-link mr-4"><router-link class="nav-link" to="/carts"><i class="fas fa-shopping-cart"></i><span class="badge badge-pill badge-danger" v-if="carts.length">{{carts.length}}</span></router-link></li>
-              </ul>
-            </div>
-          </div>
+            <ul class="navbar-nav align-items-baseline d-none d-lg-flex">
+              <li class="home nav-item mr-lg-8 mr-md-6 font-md">
+                <router-link class="nav-link text-white" to="/">
+                  <p>首頁</p>
+                </router-link>
+              </li>
+              <li class="products nav-item mr-lg-8 mr-md-6 font-md">
+                <router-link class="nav-link text-white" to="/products/all-Products">
+                  <p>產品列表</p>
+                </router-link>
+              </li>
+              <li class="logIn nav-item mr-lg-8 mr-md-6 font-md">
+                <router-link class="nav-link text-white" to="/login">
+                    <p>管理頁面</p>
+                </router-link>
+              </li>
+              <li class="favorite nav-item mr-lg-5 mr-md-3 font-xl">
+                <router-link class="nav-link" to="/favorite">
+                    <i class="fas fa-heart text-light"></i>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link class="nav-link" to="/carts">
+                  <i class="fas fa-shopping-cart font-xl text-white"></i>
+                  <span class="badge badge-pill badge-danger" v-if="carts.length">
+                    {{carts.length}}
+                  </span>
+                </router-link>
+              </li>
+            </ul>
+      </div>
     </nav>
+    <ul class="categoryList row no-gutters list-unstyled d-md-none mb-0">
+      <li class="col-6 text-white bg-wood py-1">
+        <router-link to='/products/all-Products' class="text-white">所有產品</router-link>
+      </li>
+      <li class="col-6 text-white bg-wood py-1">
+        <router-link to='/products/電吉他|貝斯' class="text-white">電吉他/貝斯</router-link>
+      </li>
+      <li class="col-6 text-white bg-wood py-1">
+        <router-link to='/products/木吉他|烏克麗麗' class="text-white">木吉他/烏克麗麗</router-link>
+      </li>
+      <li class="col-6  bg-wood py-1">
+        <router-link to='/products/周邊商品' class="text-white">周邊商品</router-link>
+      </li>
+    </ul>
+    <div class="row no-gutters collapse" data-target="#Navmenu" id="Navmenu">
+      <router-link to="/" class="col-12 bg-gray py-4 text-white font-md">
+        首頁
+      </router-link>
+      <router-link to="/products/all-Products" class="col-12 bg-gray py-4 text-white font-md">
+        產品列表
+      </router-link>
+      <router-link to="/login" class="col-12 bg-gray py-5 text-white font-md">
+        管理頁面
+      </router-link>
+      <router-link to="/favorite" class="col-12 bg-gray py-4 text-white font-md">
+          我的喜好
+      </router-link>
+      <router-link to="/carts" class="col-12 bg-gray py-4 text-white font-md">
+        購物車
+      </router-link>
+    </div>
+  </div>
 </template>
 
 <style lang="scss">
-  .navbar{
-    background-color:#a76641;
-    height: 130px;
-  }
-  .nav-title i{
-    color: #000;
-    font-size: 50px;
-  }
-  .nav-title a{
-    font-size: 40px;
-    font-family: 'Special Elite', cursive;
-  }
-  .fa-shopping-cart{
-    font-size: 25px;
-    margin-right: 20px;
-    margin-top: 15px;
-    color: white;
-  }
-  .fa-heart{
-    font-size: 28px;
-    margin-right: 20px;
-    margin-top: 22px;
-    margin-left: 35px;
-  }
-  .badge{
-    transform: translateX(-24px) translateY(5px);
-    font-size: 13px;
-  }
-  .navbar-nav .home{
-    margin-top: 15px;
-  }
-  .navbar-nav .products{
-    margin-top: 15px;
-  }
-  .navbar-nav .logIn{
-    margin-top: 15px;
-  }
-  .nav-link p{
-    font-size: 18px;
-    color: white;
-  }
+
 </style>
 
 <script>
