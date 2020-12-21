@@ -71,6 +71,9 @@
       </router-link>
       <router-link to="/carts" class="col-12 bg-gray py-4 text-white font-md">
         購物車
+        <span class="badge badge-pill badge-danger" v-if="carts.length">
+          {{carts.length}}
+        </span>
       </router-link>
     </div>
   </div>
