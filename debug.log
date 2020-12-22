@@ -33,3 +33,5 @@
 [1018/191201.018:ERROR:directory_reader_win.cc(43)] FindFirstFile: 系統找不到指定的路徑。 (0x3)
 [1023/120054.349:ERROR:directory_reader_win.cc(43)] FindFirstFile: 操作順利完成。 (0x0)
 [1025/010728.730:ERROR:directory_reader_win.cc(43)] FindFirstFile: 操作順利完成。 (0x0)
+[1222/155039.225:ERROR:directory_reader_win.cc(43)] FindFirstFile: 系統找不到指定的路徑。 (0x3)
+[1222/173243.445:ERROR:directory_reader_win.cc(43)] FindFirstFile: 系統找不到指定的路徑。 (0x3)

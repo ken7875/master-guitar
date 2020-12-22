@@ -1,25 +1,25 @@
 <template>
   <div class="products">
     <loading :active.sync="isLoading"></loading>
-    <div class="container">
+    <div class="container font-md">
       <h2 class="title mt-12 mb-6 pb-lg-6 pb-md-4">產品列表</h2>
       <ul class="category list-unstyled d-md-flex d-none justify-content-center">
-        <li @click="getProducts" class="px-6 font-lg">
+        <li @click="getProducts" class="px-6 font-xl">
           <router-link to="/products/all-Products" class="text-wood">
             所有產品
           </router-link>
         </li>
-        <li @click="getProducts" class="px-6 font-lg">
+        <li @click="getProducts" class="px-6 font-xl">
           <router-link to="/products/電吉他|貝斯" class="text-wood">
             電吉他/貝斯
           </router-link>
         </li>
-        <li @click="getProducts" class="px-6 font-lg">
+        <li @click="getProducts" class="px-6 font-xl">
           <router-link to="/products/木吉他|烏克麗麗" class="text-wood">
             木吉他/烏克麗麗
           </router-link>
         </li>
-        <li @click="getProducts" class="px-6 font-lg">
+        <li @click="getProducts" class="px-6 font-xl">
           <router-link to="/products/周邊商品" class="text-wood">
             周邊商品
           </router-link>
@@ -36,7 +36,7 @@
             </div>
             <router-link :to="`/product/${product.id}`">
               <div class="productImg img rounded-0 position-relative" :style="`background-image: url(${product.imageUrl[0]});`">
-                <p class="font-lg text-white bg-gray">查看商品</p>
+                <p class="font-xl text-white bg-gray">查看商品</p>
               </div>
             </router-link>
             <div class="card-body p-0 text-left">

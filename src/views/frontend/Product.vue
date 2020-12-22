@@ -7,9 +7,9 @@
           <img :src="imageUrl" alt="product">
         </div>
         <div class="col-md-6">
-          <h2 class="productTitle font-weight-bold h2 mb-lg-10 mb-8">
+          <h3 class="productTitle font-weight-bold mb-lg-10 mb-8">
             {{showProduct.title}}
-          </h2>
+          </h3>
           <p class="h4 font-weight-bold text-left mt-5 mb-5">
             {{showProduct.description}}
           </p>

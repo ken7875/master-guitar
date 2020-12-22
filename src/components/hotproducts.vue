@@ -73,16 +73,16 @@ export default {
         {
           id: 'FKx0op2eXeD4uOwMSasAox5uWZmG2zcpQmSiTj73Mn54FlRO1sMtgvGeX5UizCQn',
           img: [
-            'https://images.unsplash.com/photo-1583604518057-6c31e12d4e30?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80'
+            'https://images.unsplash.com/photo-1558098329-a11cff621064?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1836&q=80'
           ],
-          title: '路易斯民謠吉他REM-2886',
+          title: '路易斯民謠吉他',
           price: 28500,
           origin_price: 30000
         },
         {
           id: 'Ozr8HLOVG1HITeU4FRONFCJcli0wTgpARrRvQSoA3QVcPz7CDNIjlaDorGiUmqj7',
           img: [
-            'https://images.unsplash.com/photo-1547822281-a35ad7a23a38?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60'
+            'https://images.unsplash.com/photo-1514649923863-ceaf75b7ec00?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1868&q=80'
           ],
           title: '經典民謠吉他(黑)',
           price: 10000,

@@ -1,0 +1,16 @@
+.cart{
+    .productName{
+        @include pad() {
+            font-size: 20px;
+        }
+    }
+    img{
+        height: 270px;
+        @include pad(){
+            height: 250px;
+        }
+        @include mobile(){
+            height: 400px;
+        }
+    }
+}

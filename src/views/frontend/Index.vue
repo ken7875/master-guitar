@@ -19,7 +19,7 @@
                   選擇最好的吉他,開啟你的音樂之路
                   </p>
                   <router-link to="/products/all-Products">
-                    <button class="btn btn-primary rounded-0 mt-6 font-lg">所有商品</button>
+                    <button class="btn btn-primary rounded-0 mt-6 font-xl">所有商品</button>
                   </router-link>
                 </div>
               </div>
@@ -31,7 +31,7 @@
             <img src="https://images.unsplash.com/photo-1568663041326-6348c761f7af?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1363&q=80" alt="salesImg" class="col-lg-7 position-absolute h-100">
             <div class="container h-100">
               <div class="row h-100 align-items-center">
-                <div class="carouselContent col-lg-5 offset-lg-7 mt-4">
+                <div class="carouselContent col-lg-5 offset-lg-8 mt-4">
                   <h3 class="secondTitle text-light mb-5">
                     Master Guitar
                   </h3>
@@ -40,7 +40,7 @@
                     歡慶大師吉他滿一周年，本月全館特價
                   </p>
                   <router-link to="/products/all-Products">
-                    <button class="btn btn-primary rounded-0 mt-6 font-lg">所有商品</button>
+                    <button class="btn btn-primary rounded-0 mt-6 font-xl">所有商品</button>
                   </router-link>
                 </div>
               </div>
@@ -59,7 +59,7 @@
                     報名及活動介紹請點擊下面連結
                   </p>
                   <router-link to="/products/all-Products">
-                    <button class="btn btn-primary rounded-0 mt-6 font-lg">查看活動</button>
+                    <button class="btn btn-primary rounded-0 mt-6 font-xl">查看活動</button>
                   </router-link>
                 </div>
             </div>

@@ -2,8 +2,14 @@
     .navbar-brand{
         font-size: 40px;
         font-family: 'Special Elite', cursive;
+        @include mobile(){
+            font-size: 30px;
+        }
         i{
             font-size: 50px;
+            @include mobile(){
+                font-size: 35px;
+            }
         }
     }
     .badge{
@@ -11,6 +17,6 @@
         font-size: 13px;
     }
 }
-.categoryList li{
+.mobile_categoryList li{
     border: 1px solid $white;
 }

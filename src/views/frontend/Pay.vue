@@ -1,48 +1,45 @@
 <template>
-  <div class="container">
+  <div class="pay container">
     <loading :active.sync="isLoading"></loading>
-    <div class="row justify-content-center">
-      <div class="col-md-10">
-        <h3 class="title font-weight-bold">Checkout</h3>
-      </div>
-    </div>
+    <h2 class="title font-weight-bold mt-12 mb-6 pb-lg-6 pb-md-4">結帳頁面</h2>
     <div class="row flex-row-reverse justify-content-center pb-5">
-      <div class="checklist col-md-5">
+      <div class="checklist col-lg-5 col-md-6">
         <div class="border p-4 mb-4">
-          <div class="checklist-content d-flex mb-4" v-for="item in carts" :key="item.product.id">
+          <div class="d-flex content mb-4 align-items-center" v-for="item in carts" :key="item.product.id">
             <img
               :src="`${item.product.imageUrl[0]}`"
-              class="mr-2"
-              style="width: 48px; height: 48px; object-fit: cover"
+              class="mr-3"
             />
-            <div class="w-100">
-              <div class="mt-2 d-flex justify-content-between">
-                <p class="mb-0 font-weight-bold">{{item.product.title}}</p>
+            <div class="mt-2 w-100">
+                <div class="d-flex justify-content-between">
+                  <p class="mb-0 font-weight-bold">{{item.product.title}}</p>
+                  <p class="mb-0">{{item.product.price}}</p>
+                </div>
                 <p class="mb-0 font-weight-bold">X{{item.quantity}}</p>
-                <p class="mb-0">{{item.product.price}}</p>
-              </div>
             </div>
           </div>
           <div class="mt-4 border-top border-bottom text-muted">
-              <div class="origin_total d-flex">
-                <div class="text1 border-0 font-weight-normal">$價格</div>
-                <div class="text2 border-0  font-weight-normal">NT${{origin_total}}</div>
+              <div class="d-flex mt-4">
+                <p class="border-0 font-weight-normal mr-8">$價格</p>
+                <p class="border-0  font-weight-normal">NT${{origin_total}}</p>
               </div>
-              <div class="shipping d-flex" v-if="origin_total >= 10000" disabled>
-                <div class="text1 border-0 font-weight-normal">$運費</div>
-                <div class="text2 border-0  font-weight-normal">NT$0</div>
+              <div class="d-flex" v-if="origin_total >= 10000" disabled>
+                <p class="border-0 font-weight-normal mr-8">$運費</p>
+                <p class="border-0  font-weight-normal">NT$0</p>
               </div>
-              <div class="shipping d-flex" v-if="origin_total < 10000" disabled>
-                <div class="text1 border-0 font-weight-normal">$運費</div>
-                <div class="text2 border-0 font-weight-normal">NT$200</div>
+              <div class="d-flex" v-if="origin_total < 10000" disabled>
+                <p class="border-0 font-weight-normal mr-8">$運費</p>
+                <p class="border-0 font-weight-normal">NT$200</p>
               </div>
               <div class="discount d-flex">
-                <div class="text1 border-0 font-weight-normal">$折扣</div>
-                <div class="text2 border-0 font-weight-normal">{{origin_total}}</div>
+                <p class="border-0 font-weight-normal mr-8">$折扣</p>
+                <p class="border-0 font-weight-normal">{{origin_total}}</p>
               </div>
-              <div class="coupon">
-                <input type="text" v-model="coupon_code" value="輸入優惠碼" class="text-center text-muted ml-5">
-                <button type="button" class="couponBtn" @click="addCoupon">套用</button>
+              <div class="input-group mb-3 row no-gutters">
+                <input type="text" class="form-control px-3 col-lg-5 col-md-6 col-5" placeholder="請輸入優惠碼" v-model="coupon_code" value="輸入優惠碼">
+                <div class="input-group-append">
+                  <button class="btn btn-wood" type="submit" @click="addCoupon">套用</button>
+                </div>
               </div>
           </div>
           <div class="d-flex justify-content-between mt-4">
@@ -52,7 +49,7 @@
           </div>
         </div>
       </div>
-      <div class="form-group col-md-7">
+      <div class="form-group col-lg-7 col-md-6">
        <div class="form-title h4"><p>訂購人資料</p></div>
         <validation-observer v-slot="{ invalid }" class="col-md-6">
           <!--form表單驗證-->
@@ -133,55 +130,13 @@
               <label for="message">留言</label>
               <textarea id="message" v-model="form.message" class="form-control" cols="30" rows="3"></textarea>
             </div>
-            <div class="text-right">
-              <button type="submit" class="btn btn-primary pointer" @click="page = 1" :disabled="invalid">
-                <!--若驗證失敗則無法送出-->
-                下一步
-              </button>
-            </div>
+            <button class="btn btn-primary" type="submit" @click="page = 1" :disabled="invalid">下一步</button>
           </form>
         </validation-observer>
       </div>
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-    .title{
-        margin-top: 50px;
-        margin-bottom: 80px;
-    }
-    .form-title{
-        padding-bottom: 18px;
-        padding-left: 53px;
-        margin-left: -50px;
-        border-bottom: #000 solid;
-    }
-    .coupon{
-      width: 300px;
-      margin: 25px 0 25px 30px;
-      margin-left: 30px;
-      white-space: nowrap;
-    }
-    .origin_total{
-      margin: 25px 0 25px 80px;
-    }
-    .shipping{
-      margin:0 0 25px 80px;
-    }
-    .discount{
-      margin-left: 80px;
-    }
-    .text1{
-      margin-right: 152px;
-    }
-    .checklist .couponBtn{
-      background-color: #a76641;
-      width: 60px;
-      height: 30px;
-      border: 0px;
-    }
-</style>
 
 <script>
 export default {
