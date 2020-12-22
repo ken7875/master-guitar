@@ -1,7 +1,7 @@
 <template>
   <div class="wrap w-100 sticky-top">
     <nav class="navbar navbar-expand-lg bg-wood py-5 navbar">
-      <div class="container-md">
+      <div class="container">
         <h1>
           <router-link class="navbar-brand text-dark" to="/">
             <i class="fas fa-guitar mr-3"></i>Master Guitar
