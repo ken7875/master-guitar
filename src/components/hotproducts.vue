@@ -64,7 +64,7 @@ export default {
         {
           id: 'Rm4nNTRDi6iX5AJCSKtKbhKmiuIssqv2ZrHI6nXPdNZdPtpjKCQEm1uVlGl9QjDD',
           img: [
-            'https://images.unsplash.com/photo-1588449668365-d15e397f6787?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60'
+            'https://images.unsplash.com/photo-1585373432847-aef525292177?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80'
           ],
           title: '杜克17',
           price: 70000,
