@@ -80,7 +80,7 @@
       <hotproducts></hotproducts>
     </div>
     <div class="Bulletin d-flex justify-content-center mt-11">
-      <div class="img">
+      <div class="img d-flex justify-content-center align-items-center">
         <p>歡慶實體店面開幕，凡是輸入優惠碼<span>GUITAR_0928</span>就享有三折優惠</p>
       </div>
     </div>
