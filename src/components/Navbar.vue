@@ -1,6 +1,5 @@
 <template>
   <div class="wrap w-100 sticky-top">
-    <loading :active.sync="isLoading"></loading>
     <nav class="navbar navbar-expand-lg bg-wood py-5 navbar">
       <div class="container">
         <h1>
@@ -76,7 +75,6 @@ export default {
   data () {
     return {
       carts: [],
-      isLoading: false,
       favorProduts: [],
       myFavor: JSON.parse(localStorage.getItem('favorItem')) || []
     }
