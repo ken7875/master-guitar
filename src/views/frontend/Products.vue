@@ -1,6 +1,21 @@
 <template>
   <div class="products">
     <loading :active.sync="isLoading"></loading>
+    <ul class="mobile_categoryList row no-gutters list-unstyled d-md-none mb-0">
+      <li class="col-6 bg-wood py-1  border" @click="getProducts">
+        <router-link to="/products/all-Products" class="text-white">所有產品</router-link>
+      </li>
+      <li class="col-6 bg-wood py-1 border" @click="getProducts">
+        <router-link to="/products/電吉他|貝斯" class="text-white">電吉他/貝斯</router-link>
+      </li>
+      <li class="col-6 bg-wood py-1 border" @click="getProducts">
+        <router-link to="/products/木吉他|烏克麗麗" class="text-white">木吉他/烏克麗麗</router-link>
+      </li>
+      <li class="col-6 bg-wood py-1 border" @click="getProducts">
+        <router-link to="/products/周邊商品" class="text-white">周邊商品</router-link>
+      </li>
+    </ul>
+    <!-- mobile_categoryList -->
     <div class="container font-md">
       <h2 class="title mt-12 mb-6 pb-lg-6 pb-md-4">產品列表</h2>
       <ul class="category list-unstyled d-md-flex d-none justify-content-center">
@@ -140,7 +155,7 @@ export default {
             this.category = category
           } else if (category === 'all-Products') {
             this.showProducts = this.products
-            this.category = 'all Products'
+            this.category = 'all-Products'
           }
           this.category = category
         })
