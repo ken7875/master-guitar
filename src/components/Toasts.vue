@@ -48,7 +48,6 @@ export default {
     const vm = this
     vm.$bus.$on('message:push', (message, status = 'warning') => {
       vm.updateMessage(message, status)
-      console.log($)
     })
   },
   methods: {
