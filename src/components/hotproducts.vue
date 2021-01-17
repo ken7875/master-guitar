@@ -13,6 +13,8 @@
         </div>
       </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
     </swiper>
 </template>
 <style lang="scss" scoped>
@@ -117,14 +119,6 @@ export default {
         }
       ]
     }
-  },
-  computed: {
-    swiper () {
-      return this.$refs.mySwiper.$swiper
-    }
-  },
-  mounted () {
-    this.swiper.slideTo(1, 2000, true)
   }
 }
 </script>

@@ -69,6 +69,7 @@ export default {
       this.$http.post(api, this.user).then((response) => {
         const { token } = response.data
         const { expired } = response.data
+        console.log(response.data)
         document.cookie = `myToken=${token};expires=${new Date(expired * 1000)};` // expire * 1000 為將一般timestap轉換成時間格式
         this.$bus.$emit('message:push',
           '登入成功',

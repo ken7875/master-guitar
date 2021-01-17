@@ -5,7 +5,7 @@
     <div class="row flex-row-reverse justify-content-center pb-5">
       <div class="checklist col-lg-5 col-md-6">
         <div class="border p-4 mb-4">
-          <div class="d-flex content mb-4 align-items-center" v-for="item in carts" :key="item.product.id">
+          <div class="d-flex content mb-4 align-items-center" v-for="item in getCartsDone" :key="item.product.id">
             <img
               :src="`${item.product.imageUrl[0]}`"
               class="mr-3"
@@ -21,19 +21,19 @@
           <div class="mt-4 border-top border-bottom text-muted">
               <div class="d-flex mt-4">
                 <p class="border-0 font-weight-normal mr-8">$價格</p>
-                <p class="border-0  font-weight-normal">NT${{origin_total}}</p>
+                <p class="border-0  font-weight-normal">NT${{originTotal}}</p>
               </div>
-              <div class="d-flex" v-if="origin_total >= 10000" disabled>
+              <div class="d-flex" v-if="originTotal >= 10000" disabled>
                 <p class="border-0 font-weight-normal mr-8">$運費</p>
                 <p class="border-0  font-weight-normal">NT$0</p>
               </div>
-              <div class="d-flex" v-if="origin_total < 10000" disabled>
+              <div class="d-flex" v-if="originTotal < 10000" disabled>
                 <p class="border-0 font-weight-normal mr-8">$運費</p>
                 <p class="border-0 font-weight-normal">NT$200</p>
               </div>
               <div class="discount d-flex">
                 <p class="border-0 font-weight-normal mr-8">$折扣</p>
-                <p class="border-0 font-weight-normal">{{origin_total}}</p>
+                <p class="border-0 font-weight-normal">{{originTotal}}</p>
               </div>
               <div class="input-group mb-3 row no-gutters">
                 <input type="text" class="form-control px-3 col-lg-5 col-md-6 col-5" placeholder="請輸入優惠碼" v-model="coupon_code" value="輸入優惠碼">
@@ -44,8 +44,8 @@
           </div>
           <div class="d-flex justify-content-between mt-4">
             <p class="mb-0 h4 font-weight-bold">Total</p>
-            <p class="mb-0 h4 font-weight-bold" v-if="coupon.enabled">NT${{parseInt(total * (coupon.percent / 100)) | thousands}}</p>
-            <p class="mb-0 h4 font-weight-bold" v-else>NT${{parseInt(total) | thousands}}</p>
+            <p class="mb-0 h4 font-weight-bold" v-if="coupon.enabled">NT${{parseInt(totalPrice) | thousands}}</p>
+            <p class="mb-0 h4 font-weight-bold" v-else>NT${{parseInt(payTotal) | thousands}}</p>
           </div>
         </div>
       </div>
@@ -139,6 +139,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
   data () {
     return {
@@ -150,10 +151,6 @@ export default {
         payment: '',
         message: ''
       },
-      isLoading: false,
-      carts: [],
-      origin_total: 0,
-      total: 0,
       coupon: {},
       coupon_code: ''
     }
@@ -162,29 +159,9 @@ export default {
     this.getCart()
   },
   methods: {
-    getCart () {
-      this.isLoading = true
-      const url = `${process.env.VUE_APP_APIPATH}${process.env.VUE_APP_UUID}/ec/shopping`
-      this.$http.get(url).then((res) => {
-        this.isLoading = false
-        this.carts = res.data.data
-        this.getTotalPrice()
-      })
-    },
-    getTotalPrice () {
-      this.origin_total = 0
-      this.total = 0
-      this.carts.forEach((item) => {
-        this.origin_total += item.product.price * item.quantity
-        if (this.total < 10000) {
-          this.total = (this.origin_total + 200)
-        } else {
-          this.total = (this.origin_total + 0)
-        }
-      })
-    },
+    ...mapActions(['getCart']),
     createOrder () {
-      this.isLoading = true
+      this.$store.state.isLoading = true
       const url = `${process.env.VUE_APP_APIPATH}${process.env.VUE_APP_UUID}/ec/orders`
       const order = { ...this.form }
       if (this.coupon.enabled) {
@@ -194,26 +171,31 @@ export default {
       }
       this.axios.post(url, order)
         .then((res) => {
-          this.isLoading = false
+          this.$store.state.isLoading = false
           this.getCart()
           this.$bus.$emit('get-cart')
           this.$router.push(`/confirm/${res.data.data.id}`)
         })
     },
     addCoupon () {
-      this.isLoading = true
+      this.$store.state.isLoading = true
       const url = `${process.env.VUE_APP_APIPATH}${process.env.VUE_APP_UUID}/ec/coupon/search`
       this.axios.post(url, { code: this.coupon_code })
         .then((res) => {
+          this.$store.state.isLoading = false
           this.coupon = res.data.data
-          this.isLoading = false
-          console.log(this.coupon)
         })
         .catch(error => {
+          this.$store.state.isLoading = false
           this.$bus.$emit('message:push', `加入失敗!${error.response.data.errors}`, 'danger')
           this.coupon_code = ''
-          this.isLoading = false
         })
+    }
+  },
+  computed: {
+    ...mapGetters(['getCartsDone', 'payTotal', 'originTotal', 'isLoading']),
+    totalPrice () {
+      return this.payTotal * (this.coupon.percent / 100)
     }
   }
 }

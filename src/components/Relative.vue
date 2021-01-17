@@ -20,6 +20,8 @@
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import 'swiper/swiper-bundle.css'
 import 'swiper/components/pagination/pagination.scss'
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   components: {
     Swiper,
@@ -32,7 +34,6 @@ export default {
   },
   data () {
     return {
-      products: [],
       swiperOption: {
         direction: 'horizontal',
         slidesPerView: 1,
@@ -71,15 +72,7 @@ export default {
     this.getProducts()
   },
   methods: {
-    getProducts () {
-      this.isloading = true
-      const url = `${process.env.VUE_APP_APIPATH}${process.env.VUE_APP_UUID}/ec/products?paged=99`
-      this.$http.get(url)
-        .then(res => {
-          this.isloading = false
-          this.products = res.data.data
-        })
-    },
+    ...mapActions('productsModules', ['getProducts']),
     getDetail (id) {
       this.$router.push(`/product/${id}`)
       this.$emit('update')
@@ -87,10 +80,11 @@ export default {
   },
   computed: {
     identical () {
-      return this.products.filter((item) =>
+      return this.getProductsDone.filter((item) =>
         item.id !== this.showproduct.id && item.category === this.showproduct.category
       )
-    }
+    },
+    ...mapGetters('productsModules', ['getProductsDone'])
   }
 }
 </script>

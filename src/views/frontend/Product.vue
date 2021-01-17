@@ -42,6 +42,7 @@
 
 <script>
 import Relative from '@/components/Relative.vue'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -63,55 +64,45 @@ export default {
   created () {
     this.getProducts()
     this.getSingleProduct()
+    this.getCart()
   },
   methods: {
-    getProducts () {
-      this.isloading = true
-      const url = `${process.env.VUE_APP_APIPATH}${process.env.VUE_APP_UUID}/ec/products?paged=99`
-      this.$http.get(url)
-        .then(res => {
-          this.isloading = false
-          this.products = res.data.data
-        })
-    },
-    getCart () {
-      this.isLoading = true
-      const url = `${process.env.VUE_APP_APIPATH}${process.env.VUE_APP_UUID}/ec/shopping`
-      this.$http.get(url)
-        .then((res) => {
-          this.cart = res.data.data
-          this.isLoading = false
-        })
-    },
+    ...mapActions(['getCart']),
+    ...mapActions('productsModules', ['getProducts']),
     getSingleProduct () {
-      this.isLoading = true
+      this.$store.state.isLoading = true
       const id = this.$route.params.id
       this.showProduct = {}
       const url = `${process.env.VUE_APP_APIPATH}${process.env.VUE_APP_UUID}/ec/product/${id}`
       this.$http.get(url)
         .then((res) => {
-          this.isLoading = false
+          this.$store.state.isLoading = false
           this.showProduct = res.data.data
           this.imageUrl = this.showProduct.imageUrl[0]
         })
     },
     addToCart (id, quantity = 1) {
       const url = `${process.env.VUE_APP_APIPATH}${process.env.VUE_APP_UUID}/ec/shopping`
-      this.isLoading = true
+      this.$store.state.isLoading = true
       this.axios.post(url, {
         product: this.showProduct.id,
         quantity: quantity
       })
         .then((res) => {
-          this.isLoading = false
+          this.$store.state.isLoading = false
           this.getCart()
           this.$bus.$emit('get-cart')
           this.$bus.$emit('message-push', '商品成功加入購物車!', 'success')
+          this.$store.dispatch('getCart')
         })
         .catch((error) => {
           this.$bus.$emit('message-push', `加入失敗!${error.response.data.errors}`, 'danger')
         })
     }
+  },
+  computed: {
+    ...mapGetters('productsModules', ['getProductsDone']),
+    ...mapGetters(['getCartsDone'])
   }
 }
 

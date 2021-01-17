@@ -18,7 +18,7 @@
                   學音樂的孩子不會變壞。
                   選擇最好的吉他,開啟你的音樂之路
                   </p>
-                  <router-link to="/products/all-Products">
+                  <router-link to="/products">
                     <button class="btn btn-primary rounded-0 mt-6 font-xl">所有商品</button>
                   </router-link>
                 </div>
@@ -39,7 +39,7 @@
                   <p class="text text-light">
                     歡慶大師吉他滿一周年，本月全館特價
                   </p>
-                  <router-link to="/products/all-Products">
+                  <router-link to="/products">
                     <button class="btn btn-primary rounded-0 mt-6 font-xl">所有商品</button>
                   </router-link>
                 </div>
@@ -58,7 +58,7 @@
                   <p class="text text-light">
                     報名及活動介紹請點擊下面連結
                   </p>
-                  <router-link to="/products/all-Products">
+                  <router-link to="/products">
                     <button class="btn btn-primary rounded-0 mt-6 font-xl">查看活動</button>
                   </router-link>
                 </div>

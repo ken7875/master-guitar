@@ -122,7 +122,7 @@ export default {
       })
     },
     backToProducts () {
-      this.$router.push('/products/all-Products')
+      this.$router.push('/products')
     }
   }
 }
