@@ -19,7 +19,7 @@
                   選擇最好的吉他,開啟你的音樂之路
                   </p>
                   <router-link to="/products">
-                    <button class="btn btn-primary rounded-0 mt-6 font-xl">所有商品</button>
+                    <button class="btn btn-primary rounded-0 mt-6 text-xl">所有商品</button>
                   </router-link>
                 </div>
               </div>
@@ -40,7 +40,7 @@
                     歡慶大師吉他滿一周年，本月全館特價
                   </p>
                   <router-link to="/products">
-                    <button class="btn btn-primary rounded-0 mt-6 font-xl">所有商品</button>
+                    <button class="btn btn-primary rounded-0 mt-6 text-xl">所有商品</button>
                   </router-link>
                 </div>
               </div>
@@ -59,7 +59,7 @@
                     報名及活動介紹請點擊下面連結
                   </p>
                   <router-link to="/products">
-                    <button class="btn btn-primary rounded-0 mt-6 font-xl">查看活動</button>
+                    <button class="btn btn-primary rounded-0 mt-6 text-xl">查看活動</button>
                   </router-link>
                 </div>
             </div>
@@ -80,8 +80,8 @@
       <hotproducts></hotproducts>
     </div>
     <div class="Bulletin d-flex justify-content-center mt-11">
-      <div class="img d-flex justify-content-center align-items-center">
-        <p>歡慶實體店面開幕，凡是輸入優惠碼<span>GUITAR_0928</span>就享有三折優惠</p>
+      <div class="img d-flex justify-content-center align-items-center w-100">
+        <p class="text-xl text-white">歡慶實體店面開幕，凡是輸入優惠碼<span class="text-xl text-white bg-primary py-2 px-3 mx-3">GUITAR_0928</span>就享有三折優惠</p>
       </div>
     </div>
     <div class="productTitle mt-11">
@@ -90,25 +90,25 @@
     <div class="category container">
       <div class="row mt-5">
         <div class="card border-0 col-lg-4 col-md-12 mb-4">
-          <router-link to="/products/電吉他|貝斯">
-            <div class="img w-100 card-img-top rounded-0" style="background-image: url('https://images.unsplash.com/photo-1592051147974-5dece921ff67?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60');">
-              <p class="text w-100">電吉他 | 貝斯</p>
+          <a @click.prevent="showCategory('電吉他|貝斯')">
+            <div class="img w-100 card-img-top rounded-0 position: relative;" style="background-image: url('https://images.unsplash.com/photo-1592051147974-5dece921ff67?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60');">
+              <p class="text w-100 text-white text-xxl position-absolute">電吉他 | 貝斯</p>
             </div>
-          </router-link>
+          </a>
         </div>
         <div class="card col-lg-4 col-md-12 border-0 mb-4">
-          <router-link to="/products/木吉他|烏克麗麗">
+          <a @click.prevent="showCategory('木吉他|烏克麗麗')">
             <div class="img w-100 card-img-top rounded-0" style="background-image: url('https://images.unsplash.com/photo-1525725296312-37c06d2338ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60');">
-              <p class="text w-100">木吉他 | 烏克麗麗</p>
+              <p class="text w-100 text-white text-xxl position-absolute">木吉他 | 烏克麗麗</p>
             </div>
-          </router-link>
+          </a>
         </div>
         <div class="card col-lg-4 col-md-12 border-0 mb-4">
-          <router-link to="/products/周邊商品">
+          <a @click.prevent="showCategory('周邊商品')">
             <div class="img w-100 card-img-top rounded-0" style="background-image: url('https://images.unsplash.com/photo-1431069767777-c37892aa0a07?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60');">
-              <p class="text w-100">周邊商品</p>
+              <p class="text w-100 text-white text-xxl position-absolute">周邊商品</p>
             </div>
-          </router-link>
+          </a>
         </div>
       </div>
     </div>
@@ -165,6 +165,9 @@ export default {
           this.isLoading = false
           this.products = res.data.data
         })
+    },
+    showCategory (category) {
+      this.$router.push({ path: '/products', query: { category: category } })
     }
   },
   created () {

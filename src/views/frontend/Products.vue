@@ -16,25 +16,25 @@
       </li>
     </ul>
     <!-- desktop_categoryList -->
-    <div class="container font-md">
-      <h2 class="title mt-12 mb-6 pb-lg-6 pb-md-4">產品列表</h2>
+    <div class="container font-md mb-8">
+      <h2 class="title mt-12 mb-6 pb-lg-6 pb-4 title_border">產品列表</h2>
       <ul class="category list-unstyled d-md-flex d-none justify-content-center">
-        <li @click.prevent="category ='所有商品'" class="px-6 font-xl">
+        <li @click.prevent="category ='所有商品'" class="px-6 text-lg-xl text-lg border-right border-wood">
           <a class="text-wood">
             所有產品
           </a>
         </li>
-        <li @click.prevent="category ='電吉他|貝斯'" class="px-6 font-xl">
+        <li @click.prevent="category ='電吉他|貝斯'" class="px-6 text-lg-xl text-lg border-right border-wood">
           <a class="text-wood">
             電吉他/貝斯
           </a>
         </li>
-        <li @click.prevent="category ='木吉他|烏克麗麗'" class="px-6 font-xl">
+        <li @click.prevent="category ='木吉他|烏克麗麗'" class="px-6 text-lg-xl text-lg border-right border-wood">
           <a class="text-wood">
             木吉他/烏克麗麗
           </a>
         </li>
-        <li @click.prevent="category ='周邊商品'" class="px-6 font-xl">
+        <li @click.prevent="category ='周邊商品'" class="px-6 text-lg-xl text-lg border-right border-wood">
           <a class="text-wood">
             周邊商品
           </a>
@@ -101,6 +101,9 @@ export default {
     }
   },
   created () {
+    if (this.$route.query.category) {
+      this.category = this.$route.query.category
+    }
     this.router = this.$router.history.current.name
     this.getProducts()
     this.getCart()

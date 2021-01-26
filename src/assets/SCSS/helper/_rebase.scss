@@ -45,7 +45,9 @@ img{
     font-size: 30px;
     font-weight: bold;
 }
-
+.title_border{
+    border-bottom: $wood 2px solid;
+}
 a{
     color: #000000;
     cursor: pointer;

@@ -87,7 +87,7 @@
               </validation-provider>
             </div>
             <div class="form-group">
-              <validation-provider v-slot="{ errors, classes, passed }" rules="required|min:8">
+              <validation-provider v-slot="{ errors, classes, passed }" rules="required|min:10|max:10">
                 <label for="tel">電話</label>
                 <input id="tel" v-model="form.tel" type="tel" class="form-control" :class="classes" v-model.trim="form.tel" name="電話"/>
                 <span v-if="errors[0]" class="text-danger">{{ errors[0] }}</span>

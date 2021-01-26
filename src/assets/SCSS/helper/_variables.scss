@@ -130,6 +130,26 @@ $enable-responsive-font-sizes:                false !default;
 $enable-validation-icons:                     true !default;
 $enable-deprecation-messages:                 true !default;
 
+// font-size
+$font-size-base: 1rem;
+$font-size:() !default;
+
+$font-size: map-merge(
+    (
+        "xs": ($font-size-base * 0.75),
+        "sm": ($font-size-base * 0.875),
+        "md": $font-size-base,
+        "lg": ($font-size-base * 1.25),
+        "xl": ($font-size-base * 1.5),
+        "xxl": ($font-size-base * 1.75),
+        "xxxl": ($font-size-base * 2),
+        "4xl": ($font-size-base * 2.25),
+        "5xl": ($font-size-base * 2.5),
+        "6xl": ($font-size-base * 2.75),
+        "7xl": ($font-size-base * 3)
+    ),
+    $font-size
+);
 
 // Spacing
 //
