@@ -1,6 +1,6 @@
 <template>
   <div class="wrap w-100 sticky-top">
-    <nav class="navbar navbar-expand-lg bg-wood py-5 navbar">
+    <nav class="navbar navbar-expand-lg bg-gray-500 py-5 navbar">
       <div class="container">
         <h1>
           <router-link class="navbar-brand text-dark" to="/">

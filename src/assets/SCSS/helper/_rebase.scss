@@ -3,8 +3,9 @@
 *::after {
 	box-sizing: border-box;
 }
-
-
+html{
+    height: 100%;
+}
 body{
     height: 100%;
     overflow-x: hidden;
@@ -41,6 +42,12 @@ img{
     }
 }
 
+.height100{
+    min-height: 100vh;
+}
+.height50{
+    min-height: 50vh;
+}
 .section_title{
     font-size: 30px;
     font-weight: bold;
@@ -54,4 +61,108 @@ a{
 }
 a:hover{
     text-decoration: none;
+}
+.top{
+    &-0{
+        top: 0;
+    }
+    &-10{
+        top: 10%;
+    }
+    &-25{
+        top: 25%;
+    }
+    &-50{
+        top: 50%;
+    }
+}
+.bottom{
+    &-0{
+        bottom: 0;
+    }
+    &-10{
+        bottom: 10%;
+    }
+    &-25{
+        bottom: 25%;
+    }
+    &-50{
+        bottom: 50%;
+    }
+}
+.right{
+    &-0{
+        right: 0;
+    }
+    &-10{
+        right: 10%;
+    }
+    &-25{
+        right: 25%;
+    }
+    &-50{
+        right: 50%;
+    }
+}
+.left{
+    &-0{
+        left: 0;
+    }
+    &-10{
+        left: 10%;
+    }
+    &-25{
+        left: 25%;
+    }
+    &-50{
+        left: 50%;
+    }
+}
+.transform-center{
+    transform: translate(-50%, -50%);
+}
+.z-index{
+    &10{
+        z-index: 10;
+    }
+    &100{
+        z-index: 100;
+    }
+    &1000{
+        z-index: 1000;
+    }
+    &-alert{
+        z-index: 10000;
+    }
+}
+.bold{
+    font-weight: bold;
+}
+.fullImg{
+    height: $spacer * 22;
+    background-attachment: fixed;
+}
+.square{
+    width: $spacer *23;
+    height: $spacer * 23;
+}
+.opacity{
+    &-light{
+        opacity: 0.3;
+    }
+    &-normal{
+        opacity: 0.6;
+    }
+    &-dark{
+        opacity: 0.8;
+    }
+}
+.bannerSlogan{
+    transform: translateY(50%);
+}
+.overflow-hidden{
+    overflow: hidden;
+}
+.margin-center{
+    margin: 0 auto;
 }

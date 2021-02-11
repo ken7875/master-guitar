@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home position-relative h-100">
     <Navbar></Navbar>
     <router-view></router-view>
     <Footer></Footer>

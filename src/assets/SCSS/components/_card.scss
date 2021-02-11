@@ -5,7 +5,6 @@
             height: 450px;
         }
     }
-    position:relative;
     .favor{
         font-size: 35px;
         right: 20px;
@@ -17,6 +16,10 @@
         @include mobile(){
             height: 450px;
         }
+    }
+    &_headshot{
+        height: 100px !important;
+        width: 100px;
     }
     .productImg{
         transition: transform .5s;

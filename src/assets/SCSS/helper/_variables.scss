@@ -85,9 +85,11 @@ $theme-colors: map-merge(
     "danger":     $danger,
     "light":      $light,
     "dark":       $dark,
-    "hot":   #a70b0b,
-    "wood":  #a76641,
-    "gray":    gray,
+    "hot":      #a70b0b,
+    "wood":     #a76641,
+    "gray":     gray,
+    "lightGray":  $gray-300,
+    "gray-500":   $gray-500,
   ),
   $theme-colors
 );
@@ -146,7 +148,9 @@ $font-size: map-merge(
         "4xl": ($font-size-base * 2.25),
         "5xl": ($font-size-base * 2.5),
         "6xl": ($font-size-base * 2.75),
-        "7xl": ($font-size-base * 3)
+        "7xl": ($font-size-base * 3),
+        "8xl": ($font-size-base * 5),
+        "9xl": ($font-size-base * 7),
     ),
     $font-size
 );
@@ -174,6 +178,7 @@ $spacers: map-merge(
     10: ($spacer * 3.5),
     11: ($spacer * 4),
     12: ($spacer * 5),
+    13: ($spacer * 6),
   ),
   $spacers
 );

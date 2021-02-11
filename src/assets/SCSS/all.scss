@@ -4,17 +4,17 @@
 
 @import './helper/rebase';
 @import './helper/mixin';
+@import './helper/text';
+@import './helper/animation';
 
-@import './components/animation';
 @import './components/carousel';
 @import './components/footer';
 @import './components/card';
 @import './components/navbar';
-@import './components/text';
 @import './components/border';
-
 @import './index';
 @import './product';
 @import './cart';
 @import './pay';
 @import './confirm';
+@import './course';

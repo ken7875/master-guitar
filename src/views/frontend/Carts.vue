@@ -1,5 +1,5 @@
 <template>
-  <div class="cart container">
+  <div class="cart container h-100">
     <loading :active.sync="isLoading"></loading>
     <h2 class="mt-12 mb-6">購物車</h2>
     <div class="row">
@@ -38,7 +38,7 @@
         </div>
       </div>
     </div>
-    <div class=" total flex-wrap row no-gutters">
+    <div class=" total flex-wrap row no-gutters mb-5">
       <p class="font-xxl text-md-right col-md-12 col-6 offset-3 offset-md-0">總計$: {{cartsTotal}}</p>
       <button class="btn btn-primary col-md-3 offset-md-9 py-2 font-lg col-6 offset-3" @click="goPay">前往結帳</button>
     </div>

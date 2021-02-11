@@ -1,8 +1,8 @@
 <template>
   <div class="products">
     <loading :active.sync="isLoading"></loading>
-    <ul class="mobile_categoryList row no-gutters list-unstyled d-md-none mb-0">
-      <li class="col-6 bg-wood py-1  border" @click.prevent="category ='所有商品'">
+    <ul class="row no-gutters list-unstyled d-md-none mb-0">
+      <li class="col-6 bg-wood py-1 border" @click.prevent="category ='所有商品'">
         <a href="#" class="text-white">所有產品</a>
       </li>
       <li class="col-6 bg-wood py-1 border" @click.prevent="category ='電吉他|貝斯'">
@@ -18,7 +18,7 @@
     <!-- desktop_categoryList -->
     <div class="container font-md mb-8">
       <h2 class="title mt-12 mb-6 pb-lg-6 pb-4 title_border">產品列表</h2>
-      <ul class="category list-unstyled d-md-flex d-none justify-content-center">
+      <ul class="list-unstyled d-md-flex d-none justify-content-center">
         <li @click.prevent="category ='所有商品'" class="px-6 text-lg-xl text-lg border-right border-wood">
           <a class="text-wood">
             所有產品
@@ -44,7 +44,7 @@
     <div class="products container mt-md-5 mt-3 mb-7">
       <div class="row">
         <div class="col-lg-3 col-md-6" v-for="product in showCategory" :key="product.id">
-          <div class="card border-4 mb-4">
+          <div class="card border-4 mb-4 shadow">
             <div class="favor position-absolute" @click="addToFavor(product.id)">
               <i class="fas fa-heart text-light" v-if="myFavor.indexOf(product.id) === -1"></i>
               <i class="fas fa-heart text-danger" v-else></i>

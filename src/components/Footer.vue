@@ -1,5 +1,5 @@
 <template>
-    <div class="footer py-5 bg-wood mt-lg-13 mt-10">
+    <div class="footer py-5 bg-gray-500 w-100">
       <div class="container">
         <div class="d-flex align-items-center justify-content-between text-white">
           <div class="d-md-flex align-items-center d-block">

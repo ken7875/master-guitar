@@ -26,7 +26,6 @@ import Swiper, { Navigation, Pagination, Autoplay } from 'swiper'
 Swiper.use([Navigation, Pagination, Autoplay])
 Vue.config.productionTip = false
 window.$ = jquery
-
 Vue.use(VueAxios, axios)
 Vue.use(Loading)
 Vue.use(VueAwesomeSwiper /* { default options with global component } */)
@@ -44,7 +43,6 @@ configure({
     invalid: 'is-invalid'
   }
 })
-
 localize('tw', zhTW)
 
 Vue.component('ValidationObserver', ValidationObserver)
