@@ -11,10 +11,10 @@
       <button class="closeAlert btn btn-white position-absolute top-0 right-0 px-3">
         <i class="fas fa-times text-xl"></i>
       </button>
-      <div class="test bg-danger pt-4">
+      <div class="bg-danger pt-4">
         <h2>特別活動</h2>
         <ul class="list-unstyled row px-8">
-          <li class="col-lg-4 mb-10 mb-lg-0">
+          <li class="col-lg-4 mb-10 mb-lg-3">
             <div class="card border-0 shadow">
               <img
                 src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8Z3VpdGFyfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
@@ -44,7 +44,7 @@
               </div>
             </div>
           </li>
-          <li class="col-lg-4 mb-10">
+          <li class="col-lg-4 mb-10 mb-lg-3">
             <div class="card border-0 shadow">
               <img
                 src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8Z3VpdGFyfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
@@ -74,7 +74,7 @@
               </div>
             </div>
           </li>
-          <li class="col-lg-4 mb-10">
+          <li class="col-lg-4 mb-10 mb-lg-3">
             <div class="card border-0 shadow">
               <img
                 src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8Z3VpdGFyfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
@@ -105,6 +105,9 @@
             </div>
           </li>
         </ul>
+      </div>
+      <div class="d-flex justify-content-end">
+        <router-link to="/course" class="courseBtn btn btn-danger mb-1 mr-8">去看看</router-link>
       </div>
     </div>
   </div>
