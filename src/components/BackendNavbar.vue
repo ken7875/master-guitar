@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-gray-500">
           <div class="nav-title"><a class="navbar-brand" href="./index.html"><p><i class="fas fa-guitar"></i>Master Guitar<p/></a></div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -16,7 +16,6 @@
 
 <style lang="scss">
   .navbar{
-    background-color:#a76641;
     height: 130px;
   }
   .nav-title i{

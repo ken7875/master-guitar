@@ -2,7 +2,7 @@
   <div class="products">
     <loading :active.sync="isLoading"></loading>
     <ul class="row no-gutters list-unstyled d-md-none mb-0">
-      <li class="col-6 bg-wood py-1 border" @click.prevent="category ='所有商品'">
+      <li class="col-6 bg-wood py-1 border" @click.prevent="category =''">
         <a href="#" class="text-white">所有產品</a>
       </li>
       <li class="col-6 bg-wood py-1 border" @click.prevent="category ='電吉他|貝斯'">
@@ -19,7 +19,7 @@
     <div class="container font-md mb-8">
       <h2 class="title mt-12 mb-6 pb-lg-6 pb-4 title_border">產品列表</h2>
       <ul class="list-unstyled d-md-flex d-none justify-content-center">
-        <li @click.prevent="category ='所有商品'" class="px-6 text-lg-xl text-lg border-right border-wood">
+        <li @click.prevent="category =''" class="px-6 text-lg-xl text-lg border-right border-wood">
           <a class="text-wood">
             所有產品
           </a>
@@ -44,7 +44,7 @@
     <div class="products container mt-md-5 mt-3 mb-7">
       <div class="row">
         <div class="col-lg-3 col-md-6" v-for="product in showCategory" :key="product.id">
-          <div class="card border-4 mb-4 shadow">
+          <div class="card border-4 mb-4 shadow productsCard">
             <div class="favor position-absolute" @click="addToFavor(product.id)">
               <i class="fas fa-heart text-light" v-if="myFavor.indexOf(product.id) === -1"></i>
               <i class="fas fa-heart text-danger" v-else></i>
@@ -54,14 +54,16 @@
                 <p class="font-xl text-white bg-gray">查看商品</p>
               </div>
             </router-link>
-            <div class="card-body p-0 text-left">
+            <div class="card-body p-0 text-left px-2">
               <h5 class="mb-2 mt-3">
                 {{product.title}}
               </h5>
               <p>{{product.category}}</p>
-              <p class="card-text mb-2">
-                特價:{{product.price | thousands}}
-                <del class="font-sm ml-2">原價:{{product.origin_price | thousands}}</del>
+              <p class="text-left mb-1">
+                <del class="text-lg-md text-sm text-gray">原價: ${{product.origin_price | thousands}}</del>
+              </p>
+              <p class="text-lg-lg text-md card-text mb-2 text-left mb-1">
+                特價: ${{product.price | thousands}}
               </p>
             </div>
             <div class="card-footer d-flex justify-content-between">
@@ -149,8 +151,10 @@ export default {
       let showProducts = []
       this.getProductsDone.filter(item => {
         switch (this.category) {
-          case '所有商品':
-            showProducts.push(item)
+          case '':
+            if (item.category !== '課程') {
+              showProducts.push(item)
+            }
             break
           case '電吉他|貝斯':
             if (item.category === this.category) {

@@ -83,7 +83,7 @@
     </div>
     <div class="course position-relative">
       <p class="topContent text-center bold position-absolute text-md-xxxl text-lg mb-0 top-25 left-25 transform-center">吉他教學課程，<br>眾多資深音樂教師齊聚</p>
-      <div class="position-absolute top-50 left-50 transform-center z-index10"><i class="fas fa-times text-dark text-md-8xl text-7xl" data-aos="zoom-out-down" data-aos-delay="400" data-aos-duration="1000"></i></div>
+      <div class="position-absolute top-50 left-50 transform-center z-index10"><i class="fas fa-times text-dark text-md-8xl text-7xl" data-aos="zoom-out-down" data-aos-delay="100" data-aos-duration="800"></i></div>
       <div class="bottomContent position-absolute bottom-0 right-0 transform-center z-index10">
         <p class="text-center bold text-light text-md-xxxl text-lg mb-2">想成為音樂高手就趁現在</p>
         <router-link to="/course" class="position-relative btn btn-outline-light text-md-xxl text-lg">了解課程<span class="ml-3"><i class="fas fa-caret-right"></i></span></router-link>

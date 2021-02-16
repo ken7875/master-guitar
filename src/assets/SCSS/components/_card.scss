@@ -37,7 +37,9 @@
         } 
     }
 }
-
+.productsCard{
+    height: 501px;
+}
 .carts .card{
     .title{
         @include mobile(){

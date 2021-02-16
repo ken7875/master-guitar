@@ -5,15 +5,22 @@
     <div class="row flex-row-reverse justify-content-center pb-5">
       <div class="checklist col-lg-5 col-md-6">
         <div class="border p-4 mb-4">
-          <div class="d-flex content mb-4 align-items-center" v-for="item in getCartsDone" :key="item.product.id">
-            <img
-              :src="`${item.product.imageUrl[0]}`"
-              class="mr-3"
-            />
-            <div class="mt-2 w-100">
+          <div class="row content mb-4 align-items-center" v-for="item in getCartsDone" :key="item.product.id">
+            <div class="col-3" v-show="item.product.category !== '課程'">
+              <img
+                :src="`${item.product.imageUrl[0]}`"
+                class="checklistImg"
+              />
+            </div>
+            <div class="col-3"  v-show="item.product.category === '課程'">
+              <img
+                :src="`${item.product.imageUrl[2]}`"
+                class="checklistImg"/>
+            </div>
+            <div class="mt-2 w-100 col-9">
                 <div class="d-flex justify-content-between">
                   <p class="mb-0 font-weight-bold">{{item.product.title}}</p>
-                  <p class="mb-0">{{item.product.price}}</p>
+                  <p class="mb-0" v-if="item.product.price !== 0">{{item.product.price}}</p>
                 </div>
                 <p class="mb-0 font-weight-bold">X{{item.quantity}}</p>
             </div>

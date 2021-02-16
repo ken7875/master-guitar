@@ -3,8 +3,11 @@
     <loading :active.sync="isLoading"></loading>
     <div class="container py-3" style="backgroundColor:#FFFDD0;">
       <div class="productList row align-items-center">
-        <div class="ProductImg col-md-6 mb-6 mb-lg-0">
-          <img :src="imageUrl" alt="product">
+        <div class="singleProductImg col-md-6 mb-6 mb-lg-0" v-if="showProduct.category !== '課程'">
+          <img :src="imageUrl" alt="product" class="h-100">
+        </div>
+        <div class="singleProductImg col-md-6 mb-6 mb-lg-0" v-if="showProduct.category == '課程'">
+          <img :src="courseImageUrl" alt="product" class="h-100">
         </div>
         <div class="col-md-6">
           <h3 class="productTitle font-weight-bold mb-lg-10 mb-8">
@@ -14,10 +17,10 @@
             {{showProduct.description}}
           </p>
           <p class="h5 mb-2 text-muted text-left">
-            <del>原價:${{showProduct.origin_price}}</del>
+            <del>原價: ${{showProduct.origin_price}}</del>
           </p>
           <p class="h4 font-weight-bold text-left text-primary">
-            特價:${{showProduct.price}}
+            特價: ${{showProduct.price}}
           </p>
           <p class="h6 text-right text-primary mb-lg-10 mb-8">*樂器與音箱有一年售後維修保固</p>
           <div class="input-group px-8 mb-lg-5 mb-4">
@@ -52,7 +55,9 @@ export default {
     return {
       showProduct: {
         imageUrl: [],
-        num: 1
+        courseImageUrl: [],
+        num: 1,
+        options: {}
       },
       products: [],
       imageUrl: '',
@@ -79,24 +84,27 @@ export default {
           this.$store.state.isLoading = false
           this.showProduct = res.data.data
           this.imageUrl = this.showProduct.imageUrl[0]
+          this.courseImageUrl = this.showProduct.imageUrl[2]
         })
     },
     addToCart (id, quantity = 1) {
       const url = `${process.env.VUE_APP_APIPATH}${process.env.VUE_APP_UUID}/ec/shopping`
       this.$store.state.isLoading = true
+      this.isLoading = true
       this.axios.post(url, {
         product: this.showProduct.id,
         quantity: quantity
       })
         .then((res) => {
-          this.$store.state.isLoading = false
+          this.isLoading = false
           this.getCart()
           this.$bus.$emit('get-cart')
-          this.$bus.$emit('message-push', '商品成功加入購物車!', 'success')
+          this.$bus.$emit('message:push', '商品成功加入購物車!', 'success')
           this.$store.dispatch('getCart')
         })
         .catch((error) => {
-          this.$bus.$emit('message-push', `加入失敗!${error.response.data.errors}`, 'danger')
+          this.isLoading = false
+          this.$bus.$emit('message:push', `加入失敗!${error.response.data.errors}`, 'danger')
         })
     }
   },

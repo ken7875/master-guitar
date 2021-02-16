@@ -16,12 +16,17 @@
         <div class="border p-4 mb-4">
           <h3 class="title border-bottom pb-3 mb-5">確認明細</h3>
           <div
-            class="d-flex mb-4"
+            class="row mb-4"
             v-for="product in order.products"
             :key="product.id"
           >
-            <img :src="`${product.product.imageUrl[0]}`" class="mr-2" />
-            <div class="w-100">
+            <div class="col-3"  v-show="product.product.category !== '課程'">
+              <img :src="`${product.product.imageUrl[0]}`" class="checklistImg"/>
+            </div>
+            <div class="col-3"  v-show="product.product.category === '課程'">
+              <img :src="`${product.product.imageUrl[2]}`" class="checklistImg"/>
+            </div>
+            <div class="col-9">
               <div class="d-flex justify-content-between">
                 <p class="mb-0 font-weight-bold">{{ product.product.title }}</p>
                 <p class="mb-0">{{ product.product.price | thousands }}</p>
@@ -74,7 +79,7 @@
             <h2 class="text-light">感謝您,</h2>
             <p class="text-light font-xl">付款成功,商品將會在3天後寄到指定地址。</p>
           </div>
-          <div class="col-12 button">
+          <div class="col-12 button mb-11">
             <button class="home btn btn-primary" @click="backToProducts">
               繼續選購
             </button>
@@ -107,7 +112,7 @@ export default {
       this.isLoading = true
       this.$http.get(url).then((res) => {
         this.order = res.data.data
-        this.origin_total = res.data.data.amount
+        console.log(this.order)
         this.isLoading = false
       })
     },

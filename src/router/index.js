@@ -39,12 +39,12 @@ const routes = [
         component: () => import('../views/frontend/Confirm.vue')
       },
       {
-        path: 'favorite',
+        path: '/favorite',
         name: 'favorite',
         component: () => import('../views/frontend/Favorite.vue')
       },
       {
-        path: 'course',
+        path: '/course',
         name: 'course',
         component: () => import('../views/frontend/Course.vue')
       }

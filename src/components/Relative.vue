@@ -2,14 +2,15 @@
   <swiper class="swiper row mt-lg-8 mt-6" ref="mySwiper" :options="swiperOption">
     <swiper-slide v-for="item in identical" :key="item.id" class="swiper-slide col-lg-3">
       <div class="card border-0">
-        <div class="product border-0 mb-4" @click="getDetail(item.id)">
-          <img :src="`${item.imageUrl[0]}`" class="card-img-top" alt="top-choice 1">
+        <a href="#" class="product border-0 mb-4" @click.prevent="getDetail(item.id)">
+          <img :src="`${item.imageUrl[0]}`" class="card-img-top" alt="top-choice 1" v-if="item.category !== '課程'">
+          <img :src="`${item.imageUrl[2]}`" class="card-img-top" alt="top-choice 1" v-if="item.category === '課程'">
           <div class="card-body py-2 px-0">
             <p class="font-lg text-left">{{item.title}}</p>
             <p class="mb-0 font-md text-left">特價:{{item.price | thousands}}</p>
             <p class="text-muted mt-1 text-left"><del>原價:{{item.origin_price | thousands}}</del></p>
           </div>
-        </div>
+        </a>
       </div>
     </swiper-slide>
     <div class="swiper-pagination" slot="pagination"></div>

@@ -17,7 +17,7 @@
                 </router-link>
               </li>
               <li class="products mr-lg-8 mr-md-6 font-xl">
-                <router-link class=" text-white" to="/products">
+                <router-link class="text-white" to="/products">
                   <p class="mb-0">產品列表</p>
                 </router-link>
               </li>

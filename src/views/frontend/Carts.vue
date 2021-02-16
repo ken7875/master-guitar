@@ -1,13 +1,16 @@
 <template>
-  <div class="cart container h-100">
+  <div class="cart container height100">
     <loading :active.sync="isLoading"></loading>
     <h2 class="mt-12 mb-6">購物車</h2>
     <div class="row">
       <div class="col-md-12 col-12" v-for="item in getCartsDone" :key="item.product.id + 'carts'">
         <div class="products border mb-lg-8 mb-6">
           <div class="row align-items-center no-gutters">
-            <div class="img col-lg-2 col-md-3">
+            <div class="img col-lg-2 col-md-3" v-show="item.product.category !== '課程'">
               <img :src="`${item.product.imageUrl[0]}`" />
+            </div>
+            <div class="img col-lg-2 col-md-3" v-show="item.product.category === '課程'">
+              <img :src="`${item.product.imageUrl[2]}`" />
             </div>
             <div class="font-md col-md-3 col-12">
               <p class="productName font-xxl text-center text-left mb-1 mb-md-0 px-md-3">{{item.product.title}}</p>

@@ -1,0 +1,11 @@
+.singleProductImg{
+    height: 450px;
+}
+.checklistImg{
+    width: 80px;
+    height: 80px;
+    @include mobile(){
+        width: 60px;
+        height: 60px;
+    }
+}

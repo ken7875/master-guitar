@@ -1,5 +1,5 @@
 <template>
-  <div class="coursePage h-100">
+  <div class="coursePage">
     <div
       class="fullImg row mb-11"
       style="
@@ -20,183 +20,41 @@
     <div class="container">
       <h2 class="border-bottom pt-10 d-flex pr-8 pb-4">所有課程</h2>
       <ul class="list-unstyled row pt-8">
-        <li class="col-lg-4" data-aos="fade-down-right">
+        <li class="col-lg-4 mb-4" v-for="product in filterCourse" :key="product.id">
           <div class="card border-0 shadow">
             <img
-              src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8Z3VpdGFyfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+              :src="`${ product.imageUrl[0] }`"
               class="card-img-top"
               alt="course1"
             />
             <div class="card-body position-relative">
               <div class="position-absolute left-50 top-0 transform-center">
                 <img
-                  src="https://images.unsplash.com/photo-1593085512500-5d55148d6f0d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FydG9vbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                  :src="`${ product.imageUrl[1] }`"
                   alt=""
                   class="rounded-circle card_headshot"
                 />
               </div>
-              <h3 class="mt-8">授課老師: 王小明</h3>
-              <p class="mt-8 mb-10">
-                適合完全新手，從基本指法帶學生到能夠自己彈出喜歡的歌曲
-              </p>
-            </div>
-            <div class="card-footer d-flex justify-content-between">
-              <a href="#" class="btn btn-outline-gray px-4 py-2 btn-sm"
-                >查看課程</a
-              >
-              <a href="#" class="btn btn-outline-primary px-4 py-2 btn-sm"
-                >加入購物車</a
-              >
-            </div>
-          </div>
-        </li>
-        <li class="col-lg-4" data-aos="fade-down">
-          <div class="card border-0 shadow">
-            <img
-              src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8Z3VpdGFyfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-              class="card-img-top"
-              alt="course1"
-            />
-            <div class="card-body position-relative">
-              <div class="position-absolute left-50 top-0 transform-center">
-                <img
-                  src="https://images.unsplash.com/photo-1593085512500-5d55148d6f0d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FydG9vbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  class="rounded-circle card_headshot"
-                />
+              <h3 class="mt-8">授課老師:{{ product.options.teacher }}</h3>
+              <h4 class="mt-8 mb-5">課程名稱: {{ product.title }}</h4>
+              <p class="mt-8 mb-4" v-html="product.content"></p>
+              <div>
+                <p class="text-md-md text-right mb-1">
+                  <del class="text-lg-md text-sm text-gray">原價: ${{product.origin_price | thousands}}</del>
+                </p>
+                <p class="text-lg-lg text-md-md text-right mb-1">價格: ${{ product.price }}</p>
               </div>
-              <h3 class="mt-8">授課老師: 王小明</h3>
-              <p class="mt-8 mb-10">
-                適合完全新手，從基本指法帶學生到能夠自己彈出喜歡的歌曲
-              </p>
             </div>
             <div class="card-footer d-flex justify-content-between">
-              <a href="#" class="btn btn-outline-gray px-4 py-2 btn-sm"
-                >查看課程</a
-              >
-              <a href="#" class="btn btn-outline-primary px-4 py-2 btn-sm"
-                >加入購物車</a
-              >
-            </div>
-          </div>
-        </li>
-        <li class="col-lg-4" data-aos="fade-down-left">
-          <div class="card border-0 shadow">
-            <img
-              src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8Z3VpdGFyfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-              class="card-img-top"
-              alt="course1"
-            />
-            <div class="card-body position-relative">
-              <div class="position-absolute left-50 top-0 transform-center">
-                <img
-                  src="https://images.unsplash.com/photo-1593085512500-5d55148d6f0d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FydG9vbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  class="rounded-circle card_headshot"
-                />
-              </div>
-              <h3 class="mt-8">授課老師: 王小明</h3>
-              <p class="mt-8 mb-10">
-                適合完全新手，從基本指法帶學生到能夠自己彈出喜歡的歌曲
-              </p>
-            </div>
-            <div class="card-footer d-flex justify-content-between">
-              <a href="#" class="btn btn-outline-gray px-4 py-2 btn-sm"
-                >查看課程</a
-              >
-              <a href="#" class="btn btn-outline-primary px-4 py-2 btn-sm"
-                >加入購物車</a
-              >
-            </div>
-          </div>
-        </li>
-        <li class="col-lg-4" data-aos="fade-up-right">
-          <div class="card border-0 shadow">
-            <img
-              src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8Z3VpdGFyfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-              class="card-img-top"
-              alt="course1"
-            />
-            <div class="card-body position-relative">
-              <div class="position-absolute left-50 top-0 transform-center">
-                <img
-                  src="https://images.unsplash.com/photo-1593085512500-5d55148d6f0d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FydG9vbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  class="rounded-circle card_headshot"
-                />
-              </div>
-              <h3 class="mt-8">授課老師: 王小明</h3>
-              <p class="mt-8 mb-10">
-                適合完全新手，從基本指法帶學生到能夠自己彈出喜歡的歌曲
-              </p>
-            </div>
-            <div class="card-footer d-flex justify-content-between">
-              <a href="#" class="btn btn-outline-gray px-4 py-2 btn-sm"
-                >查看課程</a
-              >
-              <a href="#" class="btn btn-outline-primary px-4 py-2 btn-sm"
-                >加入購物車</a
-              >
-            </div>
-          </div>
-        </li>
-        <li class="col-lg-4" data-aos="fade-up">
-          <div class="card border-0 shadow">
-            <img
-              src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8Z3VpdGFyfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-              class="card-img-top"
-              alt="course1"
-            />
-            <div class="card-body position-relative">
-              <div class="position-absolute left-50 top-0 transform-center">
-                <img
-                  src="https://images.unsplash.com/photo-1593085512500-5d55148d6f0d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FydG9vbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  class="rounded-circle card_headshot"
-                />
-              </div>
-              <h3 class="mt-8">授課老師: 王小明</h3>
-              <p class="mt-8 mb-10">
-                適合完全新手，從基本指法帶學生到能夠自己彈出喜歡的歌曲
-              </p>
-            </div>
-            <div class="card-footer d-flex justify-content-between">
-              <a href="#" class="btn btn-outline-gray px-4 py-2 btn-sm"
-                >查看課程</a
-              >
-              <a href="#" class="btn btn-outline-primary px-4 py-2 btn-sm"
-                >加入購物車</a
-              >
-            </div>
-          </div>
-        </li>
-        <li class="col-lg-4" data-aos="fade-up-left">
-          <div class="card border-0 shadow">
-            <img
-              src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8Z3VpdGFyfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-              class="card-img-top"
-              alt="course1"
-            />
-            <div class="card-body position-relative">
-              <div class="position-absolute left-50 top-0 transform-center">
-                <img
-                  src="https://images.unsplash.com/photo-1593085512500-5d55148d6f0d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FydG9vbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                  class="rounded-circle card_headshot"
-                />
-              </div>
-              <h3 class="mt-8">授課老師: 王小明</h3>
-              <p class="mt-8 mb-10">
-                適合完全新手，從基本指法帶學生到能夠自己彈出喜歡的歌曲
-              </p>
-            </div>
-            <div class="card-footer d-flex justify-content-between">
-              <a href="#" class="btn btn-outline-gray px-4 py-2 btn-sm"
-                >查看課程</a
-              >
-              <a href="#" class="btn btn-outline-primary px-4 py-2 btn-sm"
-                >加入購物車</a
-              >
+              <router-link :to="`/product/${product.id}`" class="btn btn-outline-gray px-4 py-2 btn-sm">
+                查看課程
+              </router-link>
+              <a href="#" class="btn btn-outline-primary px-4 py-2 btn-sm d-flex align-items-center"
+              @click.prevent="addToCart(product.id)">
+                加入購物車
+                <i class="ml-2 spinner-grow spinner-grow-sm d-md-none d-lg-block"
+                 style="width:12px; height:12px" v-if="loadingItem == product.id"></i>
+              </a>
             </div>
           </div>
         </li>
@@ -205,13 +63,13 @@
     <div class="container">
       <h3 class="border-bottom pt-10 d-flex pr-8 pb-4">最強師資</h3>
     </div>
-    <div class="teachers-bg row h-100">
+    <div class="teachers-bg row h-100 position-relative">
       <div class="col-6 d-lg-block d-none">
         <div class="logo-block bg-danger d-flex justify-content-end align-items-center w-100 h-100">
           <h2 class="teachers-logo text-light text-9xl text-right bold" data-aos="fade-right">MASTER<br>GUITAR</h2>
         </div>
       </div>
-      <ul class="list-unstyled col-lg-6 col-12 mt-10 position-realtive">
+      <ul class="list-unstyled col-lg-6 col-12 mt-10 position-relative">
         <li class="mb-10 d-flex flex-md-nowrap flex-wrap justify-content-center">
           <div
             class="square img rounded-circle overflow-hidden position-relative"
@@ -252,7 +110,7 @@
             <div
               class="content text-white position-absolute z-index100 left-50 top-50 transform-center text-left d-none"
             >
-              <h4>王小明</h4>
+              <h4>王大維</h4>
               <p>學歷: 台灣藝術大學</p>
               <p>重要經歷:</p>
               <ul class="list-unstyled">
@@ -279,7 +137,7 @@
           <div
             class="content text-white position-absolute z-index100 left-50 top-50 transform-center text-left d-none"
           >
-            <h4>王小明</h4>
+            <h4>林小美</h4>
             <p>學歷: 台灣藝術大學</p>
             <p>重要經歷:</p>
             <ul class="list-unstyled">
@@ -301,9 +159,51 @@
 </template>
 <script>
 import $ from 'jquery'
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   data () {
-    return {}
+    return {
+      status,
+      loadingItem: ''
+    }
+  },
+  methods: {
+    ...mapActions('productsModules', ['getProducts']),
+    ...mapActions(['getCart']),
+    addToCart (id, quantity = 1) {
+      const url = `${process.env.VUE_APP_APIPATH}${process.env.VUE_APP_UUID}/ec/shopping`
+      this.loadingItem = id
+      this.axios.post(url, {
+        product: id,
+        quantity: quantity
+      })
+        .then((res) => {
+          this.$bus.$emit('get-cart')
+          this.$bus.$emit('message:push', '商品成功加入購物車!', 'success')
+          this.loadingItem = ''
+          this.$store.dispatch('getCart')
+        })
+        .catch((error) => {
+          this.$bus.$emit('message:push', `加入失敗!${error.response.data.errors}`, 'danger')
+          this.loadingItem = ''
+        })
+    }
+  },
+  created () {
+    this.getProducts()
+    this.getCart()
+  },
+  computed: {
+    ...mapGetters('productsModules', ['getProductsDone']),
+    ...mapGetters(['isLoading', 'getCartsDone']),
+    filterCourse () {
+      const showCourse = []
+      this.getProductsDone.filter((course) => {
+        return course.category === '課程' ? showCourse.push(course) : ''
+      })
+      return showCourse
+    }
   },
   mounted () {
     const imgs = document.querySelectorAll('.square')

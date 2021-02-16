@@ -203,7 +203,16 @@
                   </div>
                 </div>
                 <hr>
-
+                <div class="form-group">
+                  <label for="teacher">老師名稱</label>
+                  <input
+                    id="teacher"
+                    v-model="tempProduct.options.teacher"
+                    type="text"
+                    class="form-control"
+                    placeholder="請輸入老師名稱"
+                  />
+                </div>
                 <div class="form-group">
                   <label for="description">產品說明</label>
                   <textarea
@@ -328,7 +337,8 @@ export default {
       products: [],
       pagination: {}, // 存取分頁資料
       tempProduct: {
-        imageUrl: []
+        imageUrl: [],
+        options: { teacher: 123 }
       },
       isNew: false,
       isLoading: false,
@@ -348,8 +358,14 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}${this.uuid}/admin/ec/products?page=${page}`
       this.$http.get(api).then((response) => {
         this.products = response.data.data
+        this.setOptions()
         this.pagination = response.data.meta.pagination
         this.isLoading = false
+      })
+    },
+    setOptions () {
+      this.products.forEach(item => {
+        this.$set(item, 'options', { teacher: '' })
       })
     },
     getDetails (id) {
@@ -357,6 +373,7 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}${this.uuid}/admin/ec/product/${id}`
       this.$http.get(api).then((response) => {
         this.tempProduct = response.data.data
+        this.$set(this.tempProduct, 'options', { teacher: '' })
         $('#productModal').modal('show')
         this.isLoading = false
       })
@@ -366,7 +383,8 @@ export default {
       switch (isNew) {
         case 'new':
           this.tempProduct = {
-            imageUrl: []
+            imageUrl: [],
+            options: { teacher: 123 }
           }
           this.isNew = true
           $('#productModal').modal('show')
