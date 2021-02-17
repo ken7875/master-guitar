@@ -130,7 +130,7 @@ export default {
       setInterval(() => {
         const time = new Date()
         const nowTime = time.getTime()
-        time.setMonth(4)
+        time.setMonth(3)
         time.setDate(1)
         time.setHours(0)
         time.setMinutes(0)
