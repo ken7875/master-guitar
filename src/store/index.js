@@ -51,12 +51,6 @@ const mutations = {
       } else {
         state.payTotal = (state.originTotal + 0)
       }
-      state.originTotal += item.product.origin_price * item.quantity
-      if (state.originTotal < 10000) {
-        state.payTotal = (state.originTotal + 200)
-      } else {
-        state.payTotal = (state.originTotal + 0)
-      }
     })
   }
 }
