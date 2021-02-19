@@ -2,17 +2,17 @@
   <div class="products">
     <loading :active.sync="isLoading"></loading>
     <ul class="row no-gutters list-unstyled d-md-none mb-0">
-      <li class="col-6 bg-wood py-1 border" @click.prevent="category =''">
-        <a href="#" class="text-white">所有產品</a>
+      <li class="col-6 bg-gray-500 py-1 border" @click.prevent="category =''">
+        <a href="#" class="d-block text-white">所有產品</a>
       </li>
-      <li class="col-6 bg-wood py-1 border" @click.prevent="category ='電吉他|貝斯'">
-        <a href="#" class="text-white">電吉他/貝斯</a>
+      <li class="col-6 bg-gray-500 py-1 border" @click.prevent="category ='電吉他|貝斯'">
+        <a href="#" class="d-block text-white">電吉他/貝斯</a>
       </li>
-      <li class="col-6 bg-wood py-1 border" @click.prevent="category ='木吉他|烏克麗麗'">
-        <a href="#" class="text-white">木吉他/烏克麗麗</a>
+      <li class="col-6 bg-gray-500 py-1 border" @click.prevent="category ='木吉他|烏克麗麗'">
+        <a href="#" class="d-block text-white">木吉他/烏克麗麗</a>
       </li>
-      <li class="col-6 bg-wood py-1 border" @click.prevent="category ='周邊商品'">
-        <a href="#" class="text-white">周邊商品</a>
+      <li class="col-6 bg-gray-500 py-1 border" @click.prevent="category ='周邊商品'">
+        <a href="#" class="d-block text-white">周邊商品</a>
       </li>
     </ul>
     <!-- desktop_categoryList -->
