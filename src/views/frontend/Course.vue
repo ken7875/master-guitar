@@ -6,13 +6,13 @@
         background-image: url('https://images.unsplash.com/photo-1514213949578-58fe7b8ff146?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1052&q=80');
       "
     >
-      <div class="col-5 offset-7 align-self-end">
+      <div class="col-5 offset-lg-7 offset-md-6 offset-1 align-self-end">
         <div
-          class="title bg-danger py-2 px-4 d-inline-block right-10 bannerSlogan"
+          class="title bg-danger py-2 px-4 d-inline-block bannerSlogan"
         >
-          <h2 class="bold text-lg-7xl text-5xl text-white">精選課程</h2>
+          <h2 class="bold text-lg-7xl text-5xl text-white text-nowrap">精選課程</h2>
           <p class="text-lg-xl text-md text-white">
-            多名專業教師從零開始帶你學到會，<br />專業課程規劃帶你無痛進入音樂之路
+            多名專業教師從零開始帶你學到會。<br /><span class="d-none d-md-block">專業課程規劃帶你無痛進入音樂之路。</span>
           </p>
         </div>
       </div>

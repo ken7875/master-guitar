@@ -43,10 +43,10 @@
                 </p>
               </div>
               <div class="card-footer d-flex justify-content-between">
-                <button class="btn btn-outline-gray px-4 py-2 btn-sm" @click.prevent="goSingleProduct(product.id),closeAlert()">
+                <button class="btn btn-outline-gray px-md-4 px-2 py-2 btn-sm" @click.prevent="goSingleProduct(product.id),closeAlert()">
                   查看課程
                 </button>
-                <a href="#" class="btn btn-outline-primary px-4 py-2 btn-sm d-flex flex-nowrap align-items-center" @click.prevent="addToCart(product.id)">
+                <a href="#" class="btn btn-outline-primary px-md-4 px-2 py-2 btn-sm d-flex flex-nowrap align-items-center" @click.prevent="addToCart(product.id)">
                   加入購物車
                   <i class="ml-2 spinner-grow spinner-grow-sm d-md-none d-lg-block"
                  style="width:12px; height:12px" v-if="loadingItem == product.id"></i>

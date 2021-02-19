@@ -1,9 +1,7 @@
 .card{
     img{
         height: 255px;
-        @include mobile(){
-            height: 450px;
-        }
+        
     }
     .favor{
         font-size: 35px;
@@ -13,9 +11,7 @@
     }
     .img{
         height: 255px;
-        @include mobile(){
-            height: 450px;
-        }
+        
     }
     &_headshot{
         height: 100px !important;

@@ -43,25 +43,27 @@
       </div>
     </nav>
     <!-- mobile_collapse -->
-    <div class="row no-gutters collapse position-absolute w-100" data-target="#Navmenu" id="Navmenu">
-      <router-link to="/" class="col-12 bg-gray py-4 text-white font-xl">
-        首頁
-      </router-link>
-      <router-link to="/products" class="col-12 bg-gray py-4 text-white font-xl">
-        產品列表
-      </router-link>
-      <router-link to="/login" class="col-12 bg-gray py-5 text-white font-xl">
-        管理頁面
-      </router-link>
-      <router-link to="/favorite" class="col-12 bg-gray py-4 text-white font-xl">
-          我的喜好
-      </router-link>
-      <router-link to="/carts" class="col-12 bg-gray py-4 text-white font-xl">
-        購物車
-        <span v-if="getCartsDone.length">
-          ( {{getCartsDone.length}} )
-        </span>
-      </router-link>
+    <div class="d-block d-lg-none">
+      <div class="row no-gutters collapse position-absolute w-100" data-target="#Navmenu" id="Navmenu">
+        <router-link to="/" class="col-12 bg-gray py-4 text-white font-xl">
+          首頁
+        </router-link>
+        <router-link to="/products" class="col-12 bg-gray py-4 text-white font-xl">
+          產品列表
+        </router-link>
+        <router-link to="/login" class="col-12 bg-gray py-5 text-white font-xl">
+          管理頁面
+        </router-link>
+        <router-link to="/favorite" class="col-12 bg-gray py-4 text-white font-xl">
+            我的喜好
+        </router-link>
+        <router-link to="/carts" class="col-12 bg-gray py-4 text-white font-xl">
+          購物車
+          <span v-if="getCartsDone.length">
+            ( {{getCartsDone.length}} )
+          </span>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
