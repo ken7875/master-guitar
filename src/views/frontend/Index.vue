@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <loading :active.sync="isLoading"></loading>
+    <loading :active.sync="isLoading">
+      <loadingStyle />
+    </loading>
     <div id="carouselNavbar" class="carousel slide w-100 h-100" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#carouselNavbar" data-slide-to="0" class="active"></li>
@@ -158,9 +160,12 @@
 <script>
 import $ from 'jquery'
 import Hotproducts from '../../components/hotproducts.vue'
+import loadingStyle from '@/components/Loading.vue'
+
 export default {
   components: {
-    Hotproducts
+    Hotproducts,
+    loadingStyle
   },
   data () {
     return {

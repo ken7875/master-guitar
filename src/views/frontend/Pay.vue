@@ -1,6 +1,8 @@
 <template>
   <div class="pay container">
-    <loading :active.sync="isLoading"></loading>
+    <loading :active.sync="isLoading">
+      <loadingStyle />
+    </loading>
     <h2 class="title font-weight-bold mt-12 mb-6 pb-lg-6 pb-md-4">結帳頁面</h2>
     <div class="row flex-row-reverse justify-content-center pb-5">
       <div class="checklist col-lg-5 col-md-6">
@@ -147,7 +149,12 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import loadingStyle from '@/components/Loading.vue'
+
 export default {
+  components: {
+    loadingStyle
+  },
   data () {
     return {
       form: {

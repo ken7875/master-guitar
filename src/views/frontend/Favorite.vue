@@ -1,6 +1,8 @@
 <template>
   <div class="wrap">
-    <loading :active.sync="isLoading"></loading>
+    <loading :active.sync="isLoading">
+      <loadingStyle />
+    </loading>
     <h2 class="mt-12 mb-6">我的最愛</h2>
     <div class="container mt-md-5 mt-3 mb-7">
       <div class="row">
@@ -66,7 +68,12 @@
 </template>
 
 <script>
+import loadingStyle from '@/components/Loading.vue'
+
 export default {
+  components: {
+    loadingStyle
+  },
   data () {
     return {
       myFavor: JSON.parse(localStorage.getItem('favorItem')) || [],

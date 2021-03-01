@@ -136,11 +136,11 @@ export default {
         time.setMinutes(0)
         time.setSeconds(0)
         const endTime = time.getTime()
-        const countDown = (endTime - nowTime) / 1000
-        this.sec = parseInt(countDown % 60)
-        this.min = parseInt((countDown / 60) % 60)
-        this.hr = parseInt((countDown / 60 / 60) % 24)
-        this.day = parseInt(countDown / 60 / 60 / 24)
+        const deadline = (endTime - nowTime) / 1000
+        this.sec = parseInt(deadline % 60)
+        this.min = parseInt((deadline / 60) % 60)
+        this.hr = parseInt((deadline / 60 / 60) % 24)
+        this.day = parseInt(deadline / 60 / 60 / 24)
       }, 1000)
     },
     closeAlert () {

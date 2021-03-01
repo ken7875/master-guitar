@@ -1,5 +1,8 @@
 <template>
   <div class="coursePage">
+    <loading :active.sync="isLoading">
+      <loadingStyle />
+    </loading>
     <div
       class="fullImg row mb-11"
       style="
@@ -160,8 +163,12 @@
 <script>
 import $ from 'jquery'
 import { mapActions, mapGetters } from 'vuex'
+import loadingStyle from '@/components/Loading.vue'
 
 export default {
+  components: {
+    loadingStyle
+  },
   data () {
     return {
       status,

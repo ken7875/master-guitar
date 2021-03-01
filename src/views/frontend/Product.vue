@@ -1,6 +1,8 @@
 <template>
   <div class="wrap">
-    <loading :active.sync="isLoading"></loading>
+    <loading :active.sync="isLoading">
+      <loadingStyle />
+    </loading>
     <div class="container py-3" style="backgroundColor:#FFFDD0;">
       <div class="productList row align-items-center">
         <div class="singleProductImg col-md-6 mb-6 mb-lg-0" v-if="showProduct.category !== '課程'">
@@ -46,10 +48,11 @@
 <script>
 import Relative from '@/components/Relative.vue'
 import { mapGetters, mapActions } from 'vuex'
-
+import loadingStyle from '@/components/Loading.vue'
 export default {
   components: {
-    Relative
+    Relative,
+    loadingStyle
   },
   data () {
     return {

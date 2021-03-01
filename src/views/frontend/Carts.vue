@@ -1,6 +1,8 @@
 <template>
   <div class="cart container height100">
-    <loading :active.sync="isLoading"></loading>
+    <loading :active.sync="isLoading">
+      <loadingStyle />
+    </loading>
     <h2 class="mt-12 mb-6">購物車</h2>
     <div class="row">
       <div class="col-md-12 col-12" v-for="item in getCartsDone" :key="item.product.id + 'carts'">
@@ -50,7 +52,12 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import loadingStyle from '@/components/Loading.vue'
+
 export default {
+  components: {
+    loadingStyle
+  },
   data () {
     return {
     }

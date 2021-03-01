@@ -1,6 +1,8 @@
 <template>
   <div class="confirm container">
-    <loading :active.sync="isLoading"></loading>
+    <loading :active.sync="isLoading">
+      <loadingStyle />
+    </loading>
     <h2
       class="title font-weight-bold mt-12 mb-6 pb-lg-6 pb-md-4"
       v-if="page === 1"
@@ -90,7 +92,11 @@
 </template>
 
 <script>
+import loadingStyle from '@/components/Loading.vue'
 export default {
+  components: {
+    loadingStyle
+  },
   data () {
     return {
       order: {

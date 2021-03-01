@@ -1,6 +1,8 @@
 <template>
   <div class="products">
-    <loading :active.sync="isLoading"></loading>
+    <loading :active.sync="isLoading">
+      <loadingStyle />
+    </loading>
     <ul class="row no-gutters list-unstyled d-md-none mb-0">
       <li class="col-6 bg-gray-500 py-1 border" @click.prevent="category =''">
         <a href="#" class="d-block text-white">所有產品</a>
@@ -89,10 +91,12 @@
 <script>
 import pagination from '@/components/Pagination.vue'
 import { mapActions, mapGetters } from 'vuex'
+import loadingStyle from '@/components/Loading.vue'
 
 export default {
   components: {
-    pagination
+    pagination,
+    loadingStyle
   },
   data () {
     return {
