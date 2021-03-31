@@ -358,16 +358,16 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}${this.uuid}/admin/ec/products?page=${page}`
       this.$http.get(api).then((response) => {
         this.products = response.data.data
-        this.setOptions()
+        // this.setOptions()
         this.pagination = response.data.meta.pagination
         this.isLoading = false
       })
     },
-    setOptions () {
-      this.products.forEach(item => {
-        this.$set(item, 'options', { teacher: '' })
-      })
-    },
+    // setOptions () {
+    //   this.products.forEach(item => {
+    //     this.$set(item, 'options', { teacher: '' })
+    //   })
+    // },
     getDetails (id) {
       this.isLoading = true
       const api = `${process.env.VUE_APP_APIPATH}${this.uuid}/admin/ec/product/${id}`
