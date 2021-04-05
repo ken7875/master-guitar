@@ -46,7 +46,7 @@
     <div class="products container mt-md-5 mt-3 mb-7">
       <div class="row">
         <div class="col-lg-3 col-md-6" v-for="product in showCategory" :key="product.id">
-          <div class="card border-4 mb-4 shadow productsCard">
+          <div class="card border-4 mb-4 shadow productsCard z-index10">
             <div class="favor position-absolute" @click="addToFavor(product.id)">
               <i class="fas fa-heart text-light" v-if="myFavor.indexOf(product.id) === -1"></i>
               <i class="fas fa-heart text-danger" v-else></i>
