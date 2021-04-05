@@ -7,7 +7,7 @@
             <i class="fas fa-guitar mr-3"></i>Master Guitar
           </router-link>
         </h1>
-          <button class="btn d-lg-none font-xxl px-0" type="button" data-toggle="collapse" data-target="#Navmenu" aria-expanded="false" aria-controls="Navmenu">
+          <button class="btn d-lg-none font-xxl px-0" @click="showCollaspe">
             <i class="fas fa-bars"></i>
           </button>
             <ul class="navbar align-items-center d-none d-lg-flex list-unstyled mt-3">
@@ -43,28 +43,40 @@
       </div>
     </nav>
     <!-- mobile_collapse -->
-    <div class="d-block d-lg-none">
-      <div class="row no-gutters collapse position-absolute w-100" data-target="#Navmenu" id="Navmenu">
-        <router-link to="/" class="col-12 bg-gray py-4 text-white font-xl">
-          首頁
-        </router-link>
-        <router-link to="/products" class="col-12 bg-gray py-4 text-white font-xl">
-          產品列表
-        </router-link>
-        <router-link to="/login" class="col-12 bg-gray py-5 text-white font-xl">
-          管理頁面
-        </router-link>
-        <router-link to="/favorite" class="col-12 bg-gray py-4 text-white font-xl">
-            我的喜好
-        </router-link>
-        <router-link to="/carts" class="col-12 bg-gray py-4 text-white font-xl">
-          購物車
-          <span v-if="getCartsDone.length">
-            ( {{getCartsDone.length}} )
-          </span>
-        </router-link>
+    <transition name="slide">
+      <div class="d-block d-lg-none" v-if="collapse">
+        <div class="row no-gutters position-absolute w-100">
+          <div class="col-12 bg-gray py-4" @click="showCollaspe">
+            <router-link to="/" class="text-white font-xl">
+              首頁
+            </router-link>
+          </div>
+          <div class="col-12 bg-gray py-4" @click="showCollaspe">
+            <router-link to="/products" class="text-white font-xl">
+              產品列表
+            </router-link>
+          </div>
+          <div class="col-12 bg-gray py-4" @click="showCollaspe">
+            <router-link to="/login" class="text-white font-xl">
+              管理頁面
+            </router-link>
+          </div>
+          <div class="col-12 bg-gray py-4" @click="showCollaspe">
+            <router-link to="/favorite" class="text-white font-xl">
+                我的喜好
+            </router-link>
+          </div>
+          <div class="col-12 bg-gray py-4" @click="showCollaspe">
+            <router-link to="/carts" class="text-white font-xl">
+              購物車
+              <span v-if="getCartsDone.length">
+                ( {{getCartsDone.length}} )
+              </span>
+            </router-link>
+          </div>
+        </div>
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -79,7 +91,8 @@ export default {
     return {
       carts: [],
       favorProduts: [],
-      myFavor: JSON.parse(localStorage.getItem('favorItem')) || []
+      myFavor: JSON.parse(localStorage.getItem('favorItem')) || [],
+      collapse: false
     }
   },
   created () {
@@ -95,6 +108,9 @@ export default {
         this.myFavor.indexOf(product.id) > -1
       )
       this.isloading = false
+    },
+    showCollaspe () {
+      this.collapse = !this.collapse
     }
   },
   computed: {

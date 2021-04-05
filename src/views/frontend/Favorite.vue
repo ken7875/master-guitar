@@ -12,7 +12,7 @@
           :key="product.id"
           :disabled="myFavor.indexOf(product.id) === -1"
         >
-          <div class="card border-4 mb-4">
+          <div class="card border-4 mb-4 z-index10">
             <div
               class="img rounded-0 position-relative"
               :style="`background-image: url(${product.imageUrl[0]});`"
