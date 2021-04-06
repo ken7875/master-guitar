@@ -2,7 +2,7 @@
   <div id="app">
     <Toasts/>
     <SpecialAlert/>
-    <router-view/>
+    <router-view :key="$route.fullPath"/>
   </div>
 </template>
 
