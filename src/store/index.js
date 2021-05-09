@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import productsModules from './products'
-
+import backendApi from './backend'
 Vue.use(Vuex)
 const state = {
   carts: [],
@@ -69,6 +69,7 @@ export default new Vuex.Store({
   actions,
   mutations,
   modules: {
-    productsModules
+    productsModules,
+    backendApi
   }
 })

@@ -19,7 +19,7 @@
     </ul>
     <!-- desktop_categoryList -->
     <div class="container font-md mb-8">
-      <h2 class="title mt-12 mb-6 pb-lg-6 pb-4 title_border">產品列表</h2>
+      <h2 class="title mt-12 mb-6 pb-lg-6 pb-4 title_border">{{ $t('proudctsTitle') }}</h2>
       <ul class="list-unstyled d-md-flex d-none justify-content-center">
         <li @click.prevent="category =''" class="px-6 text-lg-xl text-lg border-right border-wood">
           <a class="text-wood">
@@ -113,6 +113,7 @@ export default {
     this.router = this.$router.history.current.name
     this.getProducts()
     this.getCart()
+    console.log(this.$route)
   },
   methods: {
     ...mapActions('productsModules', ['getProducts']),

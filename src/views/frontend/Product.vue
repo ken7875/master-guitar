@@ -73,6 +73,7 @@ export default {
     this.getProducts()
     this.getSingleProduct()
     this.getCart()
+    console.log(this.$route)
   },
   methods: {
     ...mapActions(['getCart']),

@@ -1,7 +1,11 @@
 <template>
   <div>
     <Loading :active.sync="isLoading" />
-    <div class="text-right mt-4">
+    <div class="mt-4 d-flex justify-content-between">
+      <div class="form-group mb-0 d-flex">
+        <label for="搜尋" class="text-left mr-4 text-nowrap">搜尋</label>
+        <input type="text" class="form-control" name="搜尋" >
+      </div>
       <button
         class="btn btn-wood"
         @click="openModal('new')"
@@ -30,37 +34,34 @@
           </th>
         </tr>
       </thead>
-      <tbody class="products">
+      <tbody class="products" v-for="product in getProductsData" :key="product.id">
         <tr
-          v-for="(item) in products"
-          :key="item.id"
         >
-          <td>{{ item.category }}</td>
-          <td>{{ item.title }}</td>
+          <td>{{ product.category }}</td>
+          <td>{{ product.title }}</td>
           <td class="text-right">
-            {{ item.origin_price | thousands }}
+            {{ product.origin_price | thousands }}
           </td>
           <td class="text-right">
-            {{ item.price | thousands }}
+            {{ product.price | thousands }}
           </td>
           <td>
-            <span
-              v-if="item.enabled"
+            <span v-if="product.enabled"
               class="text-success"
             >啟用</span>
-            <span v-else>未啟用</span>
+            <span v-if="!product.enabled">未啟用</span>
           </td>
           <td>
             <div class="btn-group">
               <button
                 class="btn btn-outline-wood btn-sm"
-                @click="openModal('edit', item)"
+                @click="openModal('edit', product)"
               >
                 <p>編輯</p>
               </button>
               <button
                 class="btn btn-outline-danger btn-sm"
-                @click="openModal('delete', item)"
+                @click="openModal('delete', product)"
               >
                 <p>刪除</p>
               </button>
@@ -69,17 +70,13 @@
         </tr>
       </tbody>
     </table>
-    <Pagination
-      :pages="pagination"
-      @emitPages="getProducts"
-    />
     <!-- Modal -->
     <div
       id="productModal"
       class="modal fade"
       tabindex="-1"
       role="dialog"
-      aria-labelledby="exampleModalLabel"
+      aria-labelledby="productModal"
       aria-hidden="true"
     >
       <div
@@ -89,11 +86,11 @@
         <div class="modal-content border-0">
           <div class="modal-header bg-dark text-white">
             <h5
-              id="exampleModalLabel"
+              id="productModal"
               class="modal-title"
             >
-              <span v-if="isNew">新增產品</span>
-              <span v-else>編輯 {{ tempProduct.title }} 產品</span>
+              <span>新增產品</span>
+              <span>編輯產品</span>
             </h5>
             <button
               type="button"
@@ -108,24 +105,22 @@
             <div class="row">
               <div class="col-sm-4">
                 <div
+                  class="form-group"
                   v-for="i in 5"
                   :key="i + 'img'"
-                  class="form-group"
                 >
                   <label :for="'img' + i">輸入圖片網址</label>
                   <input
-                    :id="'img' + i"
-                    v-model="tempProduct.imageUrl[i - 1]"
                     type="text"
                     class="form-control"
                     placeholder="請輸入圖片連結"
+                    v-model="tempProducts.imageUrl[i - 1]"
                   >
                 </div>
                 <div class="form-group">
                   <label for="customFile">
                     或 上傳圖片
                     <i
-                      v-if="status.fileUploading"
                       class="fas fa-spinner fa-spin"
                     />
                   </label>
@@ -134,24 +129,24 @@
                     ref="file"
                     type="file"
                     class="form-control"
-                    @change="uploadFile"
+                    @change="upLoadingFile"
                   >
                 </div>
                 <img
                   class="img"
-                  :src="tempProduct.imageUrl[0]"
                   alt
+                  :src="tempProducts.imageUrl[0]"
                 >
               </div>
               <div class="col-sm-8">
                 <div class="form-group">
-                  <label for="title">標題</label>
+                  <label for="title">{{ $t('backendTitle') }}</label>
                   <input
                     id="title"
-                    v-model="tempProduct.title"
                     type="text"
                     class="form-control"
                     placeholder="請輸入標題"
+                    v-model="tempProducts.title"
                     required
                   >
                 </div>
@@ -161,10 +156,10 @@
                     <label for="category">分類</label>
                     <input
                       id="category"
-                      v-model="tempProduct.category"
                       type="text"
                       class="form-control"
                       placeholder="請輸入分類"
+                      v-model="tempProducts.category"
                       required
                     >
                   </div>
@@ -172,10 +167,10 @@
                     <label for="price">單位</label>
                     <input
                       id="unit"
-                      v-model="tempProduct.unit"
                       type="text"
                       class="form-control"
                       placeholder="請輸入單位"
+                      v-model="tempProducts.unit"
                     >
                   </div>
                 </div>
@@ -185,20 +180,20 @@
                     <label for="origin_price">原價</label>
                     <input
                       id="origin_price"
-                      v-model="tempProduct.origin_price"
                       type="number"
                       class="form-control"
                       placeholder="請輸入原價"
+                      v-model="tempProducts.origin_price"
                     >
                   </div>
                   <div class="form-group col-md-6">
                     <label for="price">售價</label>
                     <input
                       id="price"
-                      v-model="tempProduct.price"
                       type="number"
                       class="form-control"
                       placeholder="請輸入售價"
+                      v-model="tempProducts.price"
                     >
                   </div>
                 </div>
@@ -207,7 +202,6 @@
                   <label for="teacher">老師名稱</label>
                   <input
                     id="teacher"
-                    v-model="tempProduct.options.teacher"
                     type="text"
                     class="form-control"
                     placeholder="請輸入老師名稱"
@@ -217,10 +211,10 @@
                   <label for="description">產品說明</label>
                   <textarea
                     id="description"
-                    v-model="tempProduct.description"
                     type="text"
                     class="form-control"
                     placeholder="請輸入產品說明"
+                    v-model="tempProducts.description"
                     required
                   />
                 </div>
@@ -228,16 +222,16 @@
                   <label for="content">產品描述</label>
                   <vue-editor
                     id="content"
-                    v-model="tempProduct.content"
+                    v-model="tempProducts.content"
                   />
                 </div>
                 <div class="form-group">
                   <div class="form-check">
                     <input
                       id="is_enabled"
-                      v-model="tempProduct.enabled"
                       class="form-check-input"
                       type="checkbox"
+                      v-model="tempProducts.enabled"
                     >
                     <label
                       class="form-check-label"
@@ -259,7 +253,7 @@
             <button
               type="button"
               class="btn btn-primary"
-              @click="updateProduct"
+              @click="updateProducts(tempProducts.id)"
             >
               確認
             </button>
@@ -298,7 +292,7 @@
           </div>
           <div class="modal-body">
             是否刪除
-            <strong class="text-danger">{{ tempProduct.title }}</strong> 商品(刪除後將無法恢復)。
+            <strong class="text-danger">{{ tempProducts.title }}</strong> 商品(刪除後將無法恢復)。
           </div>
           <div class="modal-footer">
             <button
@@ -311,7 +305,7 @@
             <button
               type="button"
               class="btn btn-danger"
-              @click="delProduct"
+              @click="deleteProduct(tempProducts.id)"
             >
               確認刪除
             </button>
@@ -325,150 +319,130 @@
 <script>
 /* global $ */
 import { VueEditor } from 'vue2-editor/dist/vue2-editor.core'
-import Pagination from '@/components/Pagination.vue'
+// import { apiGetDetail } from '@/assets/api/index.js'
+// import Pagination from '@/components/Pagination.vue'
+
 export default {
   name: 'Products',
   components: {
-    VueEditor,
-    Pagination
+    VueEditor
   },
   data () {
     return {
-      products: [],
-      pagination: {}, // 存取分頁資料
-      tempProduct: {
-        imageUrl: [],
-        options: { teacher: 123 }
-      },
-      isNew: false,
+      uuid: process.env.VUE_APP_UUID,
       isLoading: false,
-      status: {
-        fileUploading: false
+      isNew: false,
+      tempProducts: {
+        imageUrl: []
       },
-      uuid: process.env.VUE_APP_UUID
+      page: 1,
+      test2: []
     }
   },
-  created () {
-    this.getProducts()
+  computed: {
+    getProductsData () {
+      const allProducts = this.$store.getters['backendApi/productsGetter']
+      // 中文排序 localeCompare
+      allProducts.sort((a, b) => {
+        return a.category.localeCompare(b.category)
+      })
+      return allProducts
+    },
+    getFileRes () {
+      return this.$store.getters['backendApi/fileGetter']
+    },
+    detailGetter () {
+      return this.$store.getters['backendApi/detailGetter']
+    }
   },
   methods: {
-    // 取得產品資料
-    getProducts (page = 1) {
-      this.isLoading = true
-      const api = `${process.env.VUE_APP_APIPATH}${this.uuid}/admin/ec/products?page=${page}`
-      this.$http.get(api).then((response) => {
-        this.products = response.data.data
-        // this.setOptions()
-        this.pagination = response.data.meta.pagination
-        this.isLoading = false
-      })
+    async getProducts () {
+      const token = this.$cookie.get('myToken')
+      await this.$store.dispatch('backendApi/getProductsApi', [this.page, token])
     },
-    // setOptions () {
-    //   this.products.forEach(item => {
-    //     this.$set(item, 'options', { teacher: '' })
-    //   })
-    // },
-    getDetails (id) {
-      this.isLoading = true
-      const api = `${process.env.VUE_APP_APIPATH}${this.uuid}/admin/ec/product/${id}`
-      this.$http.get(api).then((response) => {
-        this.tempProduct = response.data.data
-        this.$set(this.tempProduct, 'options', { teacher: '' })
-        $('#productModal').modal('show')
-        this.isLoading = false
-      })
-    },
-    // 開啟 Modal 視窗
-    openModal (isNew, item) {
-      switch (isNew) {
+    // 新增/編輯 modal
+    async openModal (state, item) {
+      switch (state) {
         case 'new':
-          this.tempProduct = {
-            imageUrl: [],
-            options: { teacher: 123 }
-          }
           this.isNew = true
+          this.tempProducts = {
+            imageUrl: []
+          }
           $('#productModal').modal('show')
           break
         case 'edit':
           this.isNew = false
-          this.getDetails(item.id)
+          this.isLoading = true
+          await this.$store.dispatch('backendApi/getDetailapi', item.id)
+          this.tempProducts = this.detailGetter
+          this.isLoading = false
+          $('#productModal').modal('show')
           break
         case 'delete':
-          this.tempProduct = { ...item }
+          this.isNew = false
+          this.tempProducts = item
           $('#delProductModal').modal('show')
           break
         default:
           break
       }
     },
-    // 上傳產品資料
-    updateProduct () {
-      // 新增商品
-      let api = `${process.env.VUE_APP_APIPATH}${this.uuid}/admin/ec/product`
-      let httpMethod = 'post'
-      // 當不是新增商品時則切換成編輯商品 API
-      if (!this.isNew) {
-        api = `${process.env.VUE_APP_APIPATH}${this.uuid}/admin/ec/product/${this.tempProduct.id}`
-        httpMethod = 'patch'
-      }
-      this.$http[httpMethod](api, this.tempProduct).then(() => {
-        $('#productModal').modal('hide')
+    async updateProducts (id) {
+      const tempData = this.tempProducts
+      this.isLoading = true
+      // 新增/更新品項
+      await this.isNew ? this.$store.dispatch('backendApi/updateProducts', tempData) : this.$store.dispatch('backendApi/patchProducts', [tempData, id])
+      if (this.isNew === true) {
         this.$bus.$emit('message:push',
           '新增成功囉，好棒ヽ(＾Д＾)ﾉ ',
           'success')
-        this.isLoading = false
-        this.getProducts()
-      }).catch((error) => {
-        this.isLoading = false
-        const errorData = error.response.data
-        $('#productModal').modal('hide')
+      } else if (this.isNew === false) {
         this.$bus.$emit('message:push',
-          `出現錯誤惹，好糗Σ( ° △ °|||)︴
-            ${errorData}`,
-          'danger')
-      })
-    },
-    // 刪除產品
-    delProduct () {
-      this.isLoading = true
-      const url = `${process.env.VUE_APP_APIPATH}${this.uuid}/admin/ec/product/${this.tempProduct.id}`
-      this.$http.delete(url).then(() => {
-        $('#delProductModal').modal('hide')
-        this.isLoading = false
-        this.$bus.$emit('message:push',
-          '刪除成功囉，好棒ヽ(＾Д＾)ﾉ',
+          '更新成功囉，好棒ヽ(＾Д＾)ﾉ ',
           'success')
-        this.getProducts()
-      })
+      }
+      this.isLoading = false
+      $('#productModal').modal('hide')
     },
-    // 上傳檔案
-    uploadFile () {
-      const uploadedFile = this.$refs.file.files[0]
-      const formData = new FormData()
-      formData.append('file', uploadedFile)
-      const url = `${process.env.VUE_APP_APIPATH}${process.env.VUE_APP_UID}/admin/storage`
-      this.status.fileUploading = true
-      this.$http.post(url, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }).then((response) => {
-        this.status.fileUploading = false
-        if (response.status === 200) {
-          this.tempProduct.imageUrl.push(response.data.data.path)
-        }
-      }).catch(() => {
-        this.$bus.$emit('message:push',
-          `檔案上傳失敗惹，好糗Σ( ° △ °|||)︴
-          請檢查是不是檔案大小超過 2MB`,
-          'danger')
-        this.status.fileUploading = false
-      })
+    deleteProduct (id) {
+      this.isLoading = true
+      this.$store.dispatch('backendApi/deleteProducts', id)
+      this.isLoading = false
+      this.$bus.$emit('message:push',
+        '刪除成功囉，好棒ヽ(＾Д＾)ﾉ ',
+        'success')
+      $('#delProductModal').modal('hide')
+    },
+    async upLoadingFile () {
+      const file = this.$refs.file.files[0]
+      const createFile = new FormData()
+      createFile.append('file', file)
+      this.isLoading = true
+      await this.$store.dispatch('backendApi/upLoadFile', createFile)
+      this.tempProducts.imageUrl.push(this.getFileRes)
+      this.isLoading = false
     }
+    // 取得/刪除檔案
+    // async getLoadingFile () {
+    //   const res = await apiGetFile()
+    //   console.log(res.data.data.id)
+    //   res.data.data.forEach(item => {
+    //     this.delLoadingFile(item.id)
+    //   })
+    // }
+    // async delLoadingFile (id) {
+    //   const delRes = await apiDelFile(id)
+    //   console.log(delRes)
+    // }
+  },
+  created () {
+    // this.isLoading = true
+    console.log(this.getProductsData)
+    this.getProducts()
+    // this.isLoading = false
   }
 }
 </script>
-
 <style lang="scss">
   #productModal .img{
     width: 330px;

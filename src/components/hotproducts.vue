@@ -6,7 +6,7 @@
             <img :src="`${hotProduct.img[0]}`" class="card-img-top" alt="top-choice 1">
             <div class="card-body py-2 px-0">
               <p class="font-lg text-left">{{hotProduct.title}}</p>
-              <p class="mb-0 font-md text-left">特價:{{hotProduct.price | thousands}}</p>
+              <p class="mb-0 font-md text-left">{{`${$t('onSale')}: `}}{{hotProduct.price | thousands}}</p>
               <p class="text-muted mt-1 text-left"><del>原價:{{hotProduct.origin_price | thousands}}</del></p>
             </div>
           </router-link>

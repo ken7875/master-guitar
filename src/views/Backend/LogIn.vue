@@ -59,30 +59,40 @@ export default {
         email: '',
         password: ''
       },
+      token: '',
       isLoading: false
     }
   },
   methods: {
-    signin () {
-      this.isLoading = true
-      const api = `${process.env.VUE_APP_APIPATH}auth/login`
-      this.$http.post(api, this.user).then((response) => {
-        const { token } = response.data
-        const { expired } = response.data
-        console.log(response.data)
-        document.cookie = `myToken=${token};expires=${new Date(expired * 1000)};` // expire * 1000 為將一般timestap轉換成時間格式
+    async signin () {
+      try {
+        this.isLoading = true
+        await this.$store.dispatch('backendApi/logInApi', this.user)
+        // Axios 預設值
+        this.axios.defaults.headers.common.Authorization = `Bearer ${this.getToken}`
+        // this.$cookie.set('myToken', this.getToken, { expire: this.expireGetter })
+        this.$router.push('/admin/BackendProducts')
         this.$bus.$emit('message:push',
           '登入成功',
           'success')
         this.isLoading = false
-        this.$router.push('/admin/backendProducts')
-      }).catch((error) => {
+        // expire * 1000 為將一般timestap轉換成時間格式
+        // document.cookie = `myToken=${token};expires=${new Date(expired * 1000)};`
+      } catch (error) {
         this.$bus.$emit('message:push',
           `登入失敗瞜!
             ${error}`,
           'danger')
         this.isLoading = false
-      })
+      }
+    }
+  },
+  computed: {
+    getToken () {
+      return this.$store.getters['backendApi/tokenGetter']
+    },
+    expireGetter () {
+      return this.$store.getters['backendApi/expireGetter']
     }
   }
 }

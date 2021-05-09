@@ -15,7 +15,7 @@
             <div class="container h-100">
               <div class="row h-100 align-items-center">
                 <div class="carouselContent col-lg-6 offset-lg-3">
-                  <h2 class="title text-light">大師吉他</h2>
+                  <h2 class="title text-light">{{ $t('homeTitle') }}</h2>
                   <p class="text text-light">
                   學音樂的孩子不會變壞。
                   選擇最好的吉他,開啟你的音樂之路

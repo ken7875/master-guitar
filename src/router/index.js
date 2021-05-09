@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/frontend/Home.vue'
+// import VueCookies from 'vue-cookie'
+// import store from '@/store.js'
 Vue.use(VueRouter)
 
 const routes = [
@@ -52,22 +54,29 @@ const routes = [
   },
   {
     path: '/login',
+    name: 'Login',
     component: () => import('../views/Backend/LogIn.vue')
   },
   {
     path: '/admin',
+    name: 'admin',
+    meta: { requiresAuth: true },
     component: () => import('../views/Backend/Dashboard.vue'),
     children: [
       {
         path: 'backendProducts',
+        name: 'backendProducts',
+        meta: { requiresAuth: true },
         component: () => import('../views/Backend/Backend/BackendProducts.vue')
       },
       {
         path: 'backendOrders',
+        meta: { requiresAuth: true },
         component: () => import('../views/Backend/Backend/BackendOrders.vue')
       },
       {
         path: 'backendCoupons',
+        meta: { requiresAuth: true },
         component: () => import('../views/Backend/Backend/BackendCoupons.vue')
       }
     ]
@@ -77,5 +86,18 @@ const routes = [
 const router = new VueRouter({
   routes
 })
+
+// router.beforeEach((to, from, next) => {
+//   if (to.matched.some(record => record.meta.requiresAuth)) {
+//     const isAuth = !!(store.token === '' || store.token === null)
+//     if (isAuth) {
+//       next({ name: 'Login' })
+//     } else {
+//       next()
+//     }
+//   } else {
+//     next()
+//   }
+// })
 
 export default router

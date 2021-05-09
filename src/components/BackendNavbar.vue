@@ -8,11 +8,50 @@
             <div class="navbar-nav">
               <ul class="navbar-nav">
                <li class="home nav-link mr-4"><router-link class="nav-link" to="/"><p>前台首頁</p></router-link></li><li class="products nav-link mr-4"><router-link class="nav-link" to="/admin/backendProducts"><p>後台產品頁面</p></router-link></li><li class="coupons nav-link mr-4"><router-link class="nav-link" to="/admin/backendCoupons"><p>後台優惠卷頁面</p></router-link></li><li class="orders nav-link mr-4"><router-link class="nav-link" to="/admin/BackendOrders"><p>後台訂單頁面</p></router-link></li><li class="signOut nav-link mr-4" @click="signOut"><p>登出</p></li>
+               <li class="d-flex">
+                <select v-model="$i18n.locale" @change="setLang($i18n.locale)">
+                  <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">
+                    {{ lang }}
+                  </option>
+                </select>
+              </li>
               </ul>
             </div>
           </div>
     </nav>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      langs: ['en', 'zh_tw']
+    }
+  },
+  computed: {
+    getLang () {
+      return this.$store.getters.getLang
+    }
+  },
+  methods: {
+    signOut () {
+      document.cookie = 'myToken = ; expires = ; path=/'
+      this.$router.push('/')
+      this.$bus.$emit('message:push',
+        '登出成功',
+        'success')
+    },
+    // 保留語言 input
+    setLang (lang) {
+      console.log(lang)
+      localStorage.setItem('lang', lang)
+    }
+  },
+  created () {
+    console.log(this.getLang)
+  }
+}
+</script>
 
 <style lang="scss">
   .navbar{
@@ -50,17 +89,3 @@
     color: white;
   }
 </style>
-
-<script>
-export default {
-  methods: {
-    signOut () {
-      document.cookie = 'myToken = ; expires = ; path=/'
-      this.$router.push('/')
-      this.$bus.$emit('message:push',
-        '登出成功',
-        'success')
-    }
-  }
-}
-</script>

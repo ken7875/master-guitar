@@ -31,23 +31,28 @@ export default {
       checkSuccess: false
     }
   },
+  methods: {
+    isLogIn () {
+      // this.token = document.cookie.replace(/(?:(?:^|.*;\s*)myToken\s*=\s*([^;]*).*$)|^.*$/, '$1')
+      this.token = this.$cookie.get('myToken')
+      const url = `${process.env.VUE_APP_APIPATH}auth/check`
+      // Axios 預設值
+      this.axios.defaults.headers.common.Authorization = `Bearer ${this.token}`
+      this.axios.post(url, { api_token: this.token }).then((response) => {
+        if (!response.data.success) {
+          this.$router.push('/login')
+          this.$bus.$emit('message:push',
+            `出現錯誤瞜!
+              ${response.data.message}`,
+            'danger')
+        }
+        this.checkSuccess = true
+        console.log(this.axios.defaults)
+      })
+    }
+  },
   created () {
-    this.token = document.cookie.replace(/(?:(?:^|.*;\s*)myToken\s*=\s*([^;]*).*$)|^.*$/, '$1')
-    const url = `${process.env.VUE_APP_APIPATH}auth/check`
-    // Axios 預設值
-    this.$http.defaults.headers.common.Authorization = `Bearer ${this.token}`
-    this.$http.post(url, { api_token: this.token }).then((response) => {
-      if (!response.data.success) {
-        this.$router.push({
-          path: 'login'
-        })
-        this.$bus.$emit('message:push',
-          `出現錯誤瞜!
-            ${response.data.message}`,
-          'danger')
-      }
-      this.checkSuccess = true
-    })
+    this.isLogIn()
   }
 }
 </script>

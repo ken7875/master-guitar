@@ -22,7 +22,7 @@
                 </router-link>
               </li>
               <li class="logIn mr-lg-8 mr-md-6 font-xl">
-                <router-link class=" text-white" to="/login">
+                <router-link class=" text-white" :to='BackendLink'>
                     <p class="mb-0">管理頁面</p>
                 </router-link>
               </li>
@@ -38,6 +38,13 @@
                     {{getCartsDone.length}}
                   </span>
                 </router-link>
+              </li>
+              <li class="d-flex">
+                <select v-model="$i18n.locale" @change="setLang($i18n.locale)">
+                  <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">
+                    {{ lang }}
+                  </option>
+                </select>
               </li>
             </ul>
       </div>
@@ -92,7 +99,8 @@ export default {
       carts: [],
       favorProduts: [],
       myFavor: JSON.parse(localStorage.getItem('favorItem')) || [],
-      collapse: false
+      collapse: false,
+      langs: ['en', 'zh_tw']
     }
   },
   created () {
@@ -111,10 +119,25 @@ export default {
     },
     showCollaspe () {
       this.collapse = !this.collapse
+    },
+    // 保留語言 input
+    setLang (lang) {
+      localStorage.setItem('lang', lang)
     }
   },
   computed: {
-    ...mapGetters(['getCartsDone'])
+    ...mapGetters(['getCartsDone']),
+    BackendLink () {
+      return this.$cookie.get('myToken') === null || this.$cookie.get('myToken') === '' ? '/login' : '/admin/BackendProducts'
+    },
+    getLang: {
+      get () {
+        return this.$store.getters.getLang
+      },
+      set (val) {
+        return val
+      }
+    }
   }
 }
 </script>
